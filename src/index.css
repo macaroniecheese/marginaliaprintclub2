@@ -64,6 +64,88 @@
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
+  /* Archival blur-to-focus — the signature interaction.
+     Starts as if viewed through archival tissue paper,
+     gradually sharpens as the element enters the viewport. */
+  .archival-blur {
+    filter: blur(8px);
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      filter 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 1.2s ease-out,
+      transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .archival-blur.is-revealed {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Gentle image sharpen — replaces dramatic zoom.
+     Images start slightly soft and low-contrast,
+     then settle into full clarity on hover/reveal. */
+  .img-soft {
+    filter: blur(2px) saturate(0.7) brightness(0.96);
+    transform: scale(1.01);
+    transition:
+      filter 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .img-soft.is-revealed,
+  .group:hover .img-soft {
+    filter: blur(0) saturate(1) brightness(1);
+    transform: scale(1);
+  }
+
+  /* Museum drawer — the container slides up like a drawer
+     opening, with a slight shadow that fades in. */
+  .drawer {
+    transform: translateY(0);
+    opacity: 1;
+    transition:
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.7s ease-out,
+      box-shadow 0.5s ease;
+  }
+  .drawer.is-closed {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+
+  /* Envelope flap — the top edge of the envelope lifts
+     when its contents are revealed. */
+  .flap {
+    transform-origin: top center;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .flap.is-open {
+    transform: rotateX(-12deg);
+  }
+
+  /* Slide-out — contents slide out from under the flap */
+  .slide-out {
+    transition:
+      max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.5s ease-out 0.1s;
+    overflow: hidden;
+  }
+
+  /* Slow fade for section numbers and captions */
+  .slow-fade {
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  }
+
+  /* Tactile hover — very subtle lift for interactive elements */
+  .tactile {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.5s ease,
+                border-color 0.5s ease;
+  }
+  .tactile:hover {
+    transform: translateY(-2px);
+  }
+
   /* Subtle paper texture — very faint */
   .paper-texture {
     background-image:
@@ -83,6 +165,28 @@
   }
   .rule-bottom {
     border-bottom: 1px solid rgba(26, 26, 26, 0.12);
+  }
+
+  /* Vellum overlay — the translucent archival paper effect.
+     Applied as a pseudo-element over images that should
+     appear as if viewed through tissue paper. */
+  .vellum::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(250, 250, 247, 0.55);
+    backdrop-filter: blur(3px);
+    pointer-events: none;
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                backdrop-filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .vellum.is-revealed::after {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  .vellum:hover::after {
+    opacity: 0;
+    backdrop-filter: blur(0);
   }
 }
 

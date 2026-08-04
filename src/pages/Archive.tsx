@@ -8,6 +8,7 @@ import {
   CornerMarks,
   SectionNumber,
 } from '@/components/ArchivalMarks';
+import { useInView } from '@/hooks/useInView';
 import { archiveOne, envelopeContents, archiveIndex } from '@/data';
 
 type Props = {
@@ -64,7 +65,7 @@ export default function Archive({ onNavigate }: Props) {
           </div>
 
           {/* Single tier */}
-          <div className="max-w-2xl mx-auto border border-rule bg-paper-warm p-10 md:p-14 relative">
+          <div className="max-w-2xl mx-auto border border-rule bg-paper-warm p-10 md:p-14 relative tactile hover:shadow-lg" style={{ boxShadow: '0 0 0 0 rgba(0,0,0,0)' }}>
             <CornerMarks color="rgba(26,26,26,0.15)" />
 
             <div className="text-center mb-10">
@@ -166,39 +167,7 @@ export default function Archive({ onNavigate }: Props) {
             {archiveIndex.map((entry) => {
               const available = entry.status === 'available';
               return (
-                <div key={entry.number} className="group">
-                  <div className="relative overflow-hidden bg-paper-deep mb-4 aspect-[3/4]">
-                    <img
-                      src={entry.image}
-                      alt={entry.title}
-                      className={`w-full h-full object-cover transition-all duration-700 ${
-                        available
-                          ? 'group-hover:scale-105'
-                          : 'grayscale opacity-40 group-hover:opacity-60'
-                      }`}
-                    />
-                    <span
-                      className={`absolute top-2 left-2 font-mono text-[9px] px-2 py-0.5 tracking-[0.04em] uppercase ${
-                        available ? 'bg-accent text-paper' : 'bg-ink/70 text-paper/80'
-                      }`}
-                    >
-                      {available ? 'Now' : 'Soon'}
-                    </span>
-                  </div>
-                  <CatalogLabel className="text-ink-faint">{entry.catalog}</CatalogLabel>
-                  <div className="flex items-baseline gap-2 mt-1">
-                    <span className="font-mono text-xs text-accent tracking-[0.1em]">
-                      {entry.number}
-                    </span>
-                    <h3
-                      className={`font-display text-lg ${
-                        available ? 'text-ink' : 'text-ink-light'
-                      }`}
-                    >
-                      {entry.title}
-                    </h3>
-                  </div>
-                </div>
+                <ArchiveDrawerCard key={entry.number} entry={entry} available={available} />
               );
             })}
           </div>
@@ -249,14 +218,59 @@ function SubscribeButton({ dark = false }: { dark?: boolean }) {
   return (
     <button
       onClick={() => setSubmitted(true)}
-      className={`w-full py-4 font-mono text-xs tracking-[0.16em] uppercase transition-colors duration-300 inline-flex items-center justify-center gap-2 group ${
+      className={`w-full py-4 font-mono text-xs tracking-[0.16em] uppercase transition-colors duration-500 inline-flex items-center justify-center gap-2 group tactile ${
         dark
           ? 'bg-paper text-ink hover:bg-accent hover:text-paper'
           : 'bg-ink text-paper hover:bg-accent'
       }`}
     >
       Become an Archivist — $23/month
-      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" />
     </button>
+  );
+}
+
+function ArchiveDrawerCard({
+  entry,
+  available,
+}: {
+  entry: (typeof archiveIndex)[number];
+  available: boolean;
+}) {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
+  return (
+    <div ref={ref} className={`group drawer ${inView ? '' : 'is-closed'}`}>
+      <div className="relative overflow-hidden bg-paper-deep mb-4 aspect-[3/4]">
+        <img
+          src={entry.image}
+          alt={entry.title}
+          className={`w-full h-full object-cover img-soft ${inView ? 'is-revealed' : ''}`}
+        />
+        {!available && (
+          <div className="absolute inset-0 bg-paper/30 backdrop-blur-[2px] group-hover:opacity-0 group-hover:backdrop-blur-0 transition-all duration-[900ms] ease-out pointer-events-none" />
+        )}
+        <span
+          className={`absolute top-2 left-2 font-mono text-[9px] px-2 py-0.5 tracking-[0.04em] uppercase transition-all duration-500 ${
+            available ? 'bg-accent text-paper' : 'bg-ink/70 text-paper/80 group-hover:bg-ink/50'
+          }`}
+        >
+          {available ? 'Now' : 'Soon'}
+        </span>
+      </div>
+      <CatalogLabel className="text-ink-faint">{entry.catalog}</CatalogLabel>
+      <div className="flex items-baseline gap-2 mt-1">
+        <span className="font-mono text-xs text-accent tracking-[0.1em]">
+          {entry.number}
+        </span>
+        <h3
+          className={`font-display text-lg transition-colors duration-500 ${
+            available ? 'text-ink group-hover:text-accent' : 'text-ink-light group-hover:text-ink-soft'
+          }`}
+        >
+          {entry.title}
+        </h3>
+      </div>
+    </div>
   );
 }

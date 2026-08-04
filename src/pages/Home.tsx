@@ -9,6 +9,7 @@ import {
   CornerMarks,
   SectionNumber,
 } from '@/components/ArchivalMarks';
+import { useInView } from '@/hooks/useInView';
 import {
   archiveOne,
   envelopeContents,
@@ -37,7 +38,7 @@ export default function Home({ onNavigate }: Props) {
 }
 
 /* ═══════════════════════════════════════════════════ */
-/*  1. HERO — artwork is the hero, oversized type       */
+/*  1. HERO                                              */
 /* ═══════════════════════════════════════════════════ */
 function Hero({ onNavigate }: { onNavigate: (page: string) => void }) {
   return (
@@ -49,7 +50,6 @@ function Hero({ onNavigate }: { onNavigate: (page: string) => void }) {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-ink/30" />
 
-      {/* Top metadata bar */}
       <div className="absolute top-0 left-0 right-0 z-10 px-6 pt-24 pb-4">
         <div className="max-w-8xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -60,7 +60,6 @@ function Hero({ onNavigate }: { onNavigate: (page: string) => void }) {
         </div>
       </div>
 
-      {/* Bottom content */}
       <div className="relative z-10 w-full px-6 pb-16 md:pb-24">
         <div className="max-w-8xl mx-auto">
           <p className="font-mono text-xs tracking-[0.2em] uppercase text-paper/70 mb-6 fade-in">
@@ -77,13 +76,13 @@ function Hero({ onNavigate }: { onNavigate: (page: string) => void }) {
           <div className="flex flex-col sm:flex-row gap-4 mt-12 fade-up">
             <button
               onClick={() => onNavigate('archive')}
-              className="px-10 py-4 bg-paper text-ink font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent hover:text-paper transition-colors duration-300"
+              className="px-10 py-4 bg-paper text-ink font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent hover:text-paper transition-colors duration-500 tactile"
             >
               Become an Archivist
             </button>
             <button
               onClick={() => onNavigate('archive')}
-              className="px-10 py-4 border border-paper/30 text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-paper/10 transition-colors duration-300"
+              className="px-10 py-4 border border-paper/30 text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-paper/10 transition-colors duration-500 tactile"
             >
               Explore Archive No. 001
             </button>
@@ -98,15 +97,18 @@ function Hero({ onNavigate }: { onNavigate: (page: string) => void }) {
 }
 
 /* ═══════════════════════════════════════════════════ */
-/*  2. WHAT'S INSIDE — archival envelope reveal        */
+/*  2. WHAT'S INSIDE — archival envelope reveal          */
+/*  Items start blurred (behind archival tissue),        */
+/*  sharpen as they enter the viewport. Clicking opens   */
+/*  the envelope — flap lifts, contents slide out.       */
 /* ═══════════════════════════════════════════════════ */
 function WhatsInside() {
   const [open, setOpen] = useState<number | null>(null);
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
     <section className="py-32 md:py-40 px-6 rule-bottom">
       <div className="max-w-5xl mx-auto">
-        {/* Section header */}
         <div className="flex items-start gap-8 mb-20">
           <SectionNumber num="01" className="flex-shrink-0 -ml-2" />
           <div className="pt-6">
@@ -119,13 +121,17 @@ function WhatsInside() {
         </div>
 
         {/* Envelope stack */}
-        <div className="space-y-1">
+        <div ref={ref} className="space-y-1">
           {envelopeContents.map((item, i) => {
             const isOpen = open === i;
+            // Stagger the reveal — each item focuses slightly after the previous
+            const revealed = inView;
+            const delay = `${i * 120}ms`;
+
             return (
               <div
                 key={item.id}
-                className={`border-t border-rule transition-colors duration-300 ${
+                className={`border-t border-rule transition-colors duration-500 ${
                   isOpen ? 'bg-paper-warm' : 'bg-transparent'
                 }`}
               >
@@ -138,14 +144,17 @@ function WhatsInside() {
                     {item.catalog}
                   </CatalogLabel>
 
-                  {/* Thumbnail */}
+                  {/* Thumbnail — starts blurred, sharpens on reveal */}
                   <div className="relative w-14 h-14 md:w-16 md:h-16 flex-shrink-0 overflow-hidden bg-paper-deep">
                     <img
                       src={item.image}
                       alt={item.label}
-                      className={`w-full h-full object-cover transition-all duration-700 ${
-                        isOpen ? 'opacity-100' : 'opacity-50 grayscale group-hover:opacity-80 group-hover:grayscale-0'
-                      }`}
+                      className={`w-full h-full object-cover transition-all duration-[1200ms] ${
+                        revealed
+                          ? 'opacity-90 blur-0 grayscale-0'
+                          : 'opacity-30 blur-sm grayscale'
+                      } ${isOpen ? 'opacity-100' : ''}`}
+                      style={{ transitionDelay: delay }}
                     />
                   </div>
 
@@ -154,42 +163,49 @@ function WhatsInside() {
                     <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-accent">
                       {item.fig}
                     </span>
-                    <h3 className="font-display text-xl md:text-2xl text-ink mt-0.5">
+                    <h3
+                      className={`font-display text-xl md:text-2xl transition-colors duration-500 ${
+                        isOpen ? 'text-ink' : 'text-ink-soft group-hover:text-ink'
+                      }`}
+                    >
                       {item.label}
                     </h3>
                   </div>
 
                   {/* Toggle */}
-                  <div className="flex-shrink-0 text-ink-light">
-                    {isOpen ? (
-                      <Minus className="w-4 h-4" />
-                    ) : (
-                      <Plus className="w-4 h-4 group-hover:text-accent transition-colors" />
-                    )}
+                  <div
+                    className={`flex-shrink-0 transition-colors duration-500 ${
+                      isOpen ? 'text-accent' : 'text-ink-light group-hover:text-accent'
+                    }`}
+                  >
+                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                   </div>
                 </button>
 
-                {/* Reveal panel */}
+                {/* Envelope reveal — contents slide out */}
                 <div
-                  className={`grid transition-all duration-500 ease-out ${
-                    isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  className={`slide-out ${
+                    isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <div className="overflow-hidden">
-                    <div className="pb-8 pl-0 md:pl-[10.5rem]">
-                      <div className="flex flex-col md:flex-row gap-8 items-start">
-                        <div className="relative w-full md:w-56 aspect-[3/2] overflow-hidden bg-paper-deep flex-shrink-0">
-                          <img src={item.image} alt={item.label} className="w-full h-full object-cover" />
-                          <CornerMarks />
-                        </div>
-                        <div>
-                          <p className="text-ink-soft leading-relaxed text-base md:text-lg max-w-md">
-                            {item.note}
-                          </p>
-                          <MarginNote className="mt-4 block">
-                            {isOpen ? '↳ see the envelope for the full version' : ''}
-                          </MarginNote>
-                        </div>
+                  <div className="pb-8 pl-0 md:pl-[10.5rem]">
+                    <div className="flex flex-col md:flex-row gap-8 items-start">
+                      {/* Image with vellum overlay — lifts as it's revealed */}
+                      <div className={`relative w-full md:w-56 aspect-[3/2] overflow-hidden bg-paper-deep flex-shrink-0 vellum ${isOpen ? 'is-revealed' : ''}`}>
+                        <img
+                          src={item.image}
+                          alt={item.label}
+                          className="w-full h-full object-cover"
+                        />
+                        <CornerMarks />
+                      </div>
+                      <div>
+                        <p className="text-ink-soft leading-relaxed text-base md:text-lg max-w-md">
+                          {item.note}
+                        </p>
+                        <MarginNote className="mt-4 block">
+                          ↳ see the envelope for the full version
+                        </MarginNote>
                       </div>
                     </div>
                   </div>
@@ -210,13 +226,14 @@ function WhatsInside() {
 }
 
 /* ═══════════════════════════════════════════════════ */
-/*  3. ARCHIVE NO. 001 — the current issue              */
+/*  3. ARCHIVE NO. 001                                   */
 /* ═══════════════════════════════════════════════════ */
 function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
   return (
     <section className="py-32 md:py-40 px-6 bg-paper-warm rule-bottom">
       <div className="max-w-8xl mx-auto">
-        {/* Section header */}
         <div className="flex items-start gap-8 mb-20">
           <SectionNumber num="02" className="flex-shrink-0 -ml-2" />
           <div className="pt-6">
@@ -227,9 +244,9 @@ function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) 
           </div>
         </div>
 
-        <div className="grid md:grid-cols-[1.3fr_1fr] gap-12 md:gap-20 items-start">
-          {/* Artwork — the hero */}
-          <div className="relative">
+        <div ref={ref} className="grid md:grid-cols-[1.3fr_1fr] gap-12 md:gap-20 items-start">
+          {/* Artwork — starts soft, gently sharpens into view */}
+          <div className={`archival-blur ${inView ? 'is-revealed' : ''}`}>
             <div className="relative aspect-[4/5] overflow-hidden bg-paper-deep">
               <img
                 src={archiveOne.heroImage}
@@ -238,7 +255,6 @@ function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) 
               />
               <CornerMarks />
             </div>
-            {/* Museum caption */}
             <div className="mt-4 flex items-start gap-4">
               <RegistrationMark size={10} color="rgba(26,26,26,0.4)" className="mt-1 flex-shrink-0" />
               <div>
@@ -250,8 +266,8 @@ function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) 
             </div>
           </div>
 
-          {/* Details */}
-          <div className="md:pt-8">
+          {/* Details — fades in after the artwork */}
+          <div className={`md:pt-8 archival-blur ${inView ? 'is-revealed' : ''}`} style={{ transitionDelay: '0.3s' }}>
             <h3 className="font-display italic font-light text-5xl md:text-6xl text-ink mb-4 leading-[0.95] tracking-tight">
               {archiveOne.title}
             </h3>
@@ -264,14 +280,14 @@ function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) 
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => onNavigate('archive')}
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-300 group"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-500 group tactile"
               >
                 Subscribe — No. 001
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" />
               </button>
               <button
                 onClick={() => onNavigate('archive')}
-                className="px-8 py-3.5 border border-rule font-mono text-xs tracking-[0.16em] uppercase text-ink-soft hover:border-ink hover:text-ink transition-colors duration-300"
+                className="px-8 py-3.5 border border-rule font-mono text-xs tracking-[0.16em] uppercase text-ink-soft hover:border-ink hover:text-ink transition-colors duration-500 tactile"
               >
                 Read the Full Archive
               </button>
@@ -284,7 +300,9 @@ function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) 
 }
 
 /* ═══════════════════════════════════════════════════ */
-/*  4. ARCHIVE INDEX — collectible grid                 */
+/*  4. ARCHIVE INDEX — museum drawer cards               */
+/*  Each card is a drawer: closed = dimmed,               */
+/*  hover = drawer slides open, image sharpens.          */
 /* ═══════════════════════════════════════════════════ */
 function ArchiveIndexSection() {
   return (
@@ -304,47 +322,7 @@ function ArchiveIndexSection() {
           {archiveIndex.map((entry) => {
             const available = entry.status === 'available';
             return (
-              <div key={entry.number} className="group">
-                <div className="relative overflow-hidden bg-paper-deep mb-5 aspect-[4/3]">
-                  <img
-                    src={entry.image}
-                    alt={entry.title}
-                    className={`w-full h-full object-cover transition-all duration-700 ${
-                      available
-                        ? 'group-hover:scale-105'
-                        : 'grayscale opacity-40 group-hover:opacity-60 group-hover:grayscale-0'
-                    }`}
-                  />
-                  <span
-                    className={`absolute top-3 left-3 font-mono text-[10px] px-2.5 py-1 tracking-[0.08em] uppercase ${
-                      available ? 'bg-accent text-paper' : 'bg-ink/70 text-paper/80'
-                    }`}
-                  >
-                    {available ? 'Available' : 'Coming Soon'}
-                  </span>
-                </div>
-                {/* Museum caption */}
-                <div className="flex items-baseline gap-3 mb-2">
-                  <CatalogLabel className="text-accent">{entry.catalog}</CatalogLabel>
-                  <span className="text-ink-faint">·</span>
-                  <DateStamp>{entry.date}</DateStamp>
-                </div>
-                <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-sm text-accent tracking-[0.1em]">
-                    {entry.number}
-                  </span>
-                  <h3
-                    className={`font-display text-2xl md:text-3xl ${
-                      available ? 'text-ink' : 'text-ink-light'
-                    }`}
-                  >
-                    {entry.title}
-                  </h3>
-                </div>
-                <p className="font-mono text-[11px] text-ink-faint mt-1 tracking-[0.04em] uppercase">
-                  {entry.note}
-                </p>
-              </div>
+              <ArchiveDrawer key={entry.number} entry={entry} available={available} />
             );
           })}
         </div>
@@ -359,10 +337,75 @@ function ArchiveIndexSection() {
   );
 }
 
+function ArchiveDrawer({
+  entry,
+  available,
+}: {
+  entry: (typeof archiveIndex)[number];
+  available: boolean;
+}) {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
+  return (
+    <div
+      ref={ref}
+      className={`group drawer ${inView ? '' : 'is-closed'}`}
+    >
+      {/* Drawer face — the image plate */}
+      <div className="relative overflow-hidden bg-paper-deep mb-5 aspect-[4/3]">
+        <img
+          src={entry.image}
+          alt={entry.title}
+          className={`w-full h-full object-cover img-soft ${inView ? 'is-revealed' : ''}`}
+        />
+        {/* Vellum overlay on closed drawers — lifts on hover */}
+        {!available && (
+          <div className="absolute inset-0 bg-paper/30 backdrop-blur-[2px] group-hover:opacity-0 group-hover:backdrop-blur-0 transition-all duration-[900ms] ease-out pointer-events-none" />
+        )}
+        <span
+          className={`absolute top-3 left-3 font-mono text-[10px] px-2.5 py-1 tracking-[0.08em] uppercase transition-all duration-500 ${
+            available
+              ? 'bg-accent text-paper'
+              : 'bg-ink/70 text-paper/80 group-hover:bg-ink/50'
+          }`}
+        >
+          {available ? 'Available' : 'Coming Soon'}
+        </span>
+      </div>
+
+      {/* Museum caption */}
+      <div className="flex items-baseline gap-3 mb-2">
+        <CatalogLabel className="text-accent">{entry.catalog}</CatalogLabel>
+        <span className="text-ink-faint">·</span>
+        <DateStamp>{entry.date}</DateStamp>
+      </div>
+      <div className="flex items-baseline gap-3">
+        <span className="font-mono text-sm text-accent tracking-[0.1em]">
+          {entry.number}
+        </span>
+        <h3
+          className={`font-display text-2xl md:text-3xl transition-colors duration-500 ${
+            available
+              ? 'text-ink group-hover:text-accent'
+              : 'text-ink-light group-hover:text-ink-soft'
+          }`}
+        >
+          {entry.title}
+        </h3>
+      </div>
+      <p className="font-mono text-[11px] text-ink-faint mt-1 tracking-[0.04em] uppercase">
+        {entry.note}
+      </p>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════════════ */
-/*  5. WHY MARGINALIA EXISTS — personal story           */
+/*  5. WHY MARGINALIA EXISTS                             */
 /* ═══════════════════════════════════════════════════ */
 function WhyMarginalia() {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
   return (
     <section className="py-32 md:py-40 px-6 bg-paper-warm rule-bottom">
       <div className="max-w-3xl mx-auto">
@@ -376,41 +419,46 @@ function WhyMarginalia() {
           </div>
         </div>
 
-        <div className="space-y-6 text-lg text-ink-soft leading-relaxed">
-          <p>
-            My grandmother kept a jar of lemon pickle on the top shelf of her
-            kitchen, in a spot where the sun hit every afternoon. I never
-            thought about it. It was just there — like the salt, like the
-            matches, like the things that are so ordinary they become
-            invisible.
-          </p>
-          <p>
-            Years later, standing in my own kitchen a thousand miles from hers,
-            I started wondering about that jar. Not the recipe — I had that.
-            The question was <em className="font-display italic text-ink">why</em>. Why salt? Why the sun? Why
-            eleven days and not ten? Why does every culture that grows lemons
-            have some version of this exact thing, and why did they all arrive
-            at it on their own?
-          </p>
-          <p>
-            One question became five. Five became a painting, a science card, a
-            history, a letter. That's the whole project. Marginalia is what
-            happens when you take the ingredient in the corner of the page —
-            the one the recipe doesn't bother to explain — and give it the
-            attention it quietly deserves.
-          </p>
-          <p>
-            I'm not a historian or a scientist. I'm a painter who got curious
-            and couldn't stop. Each archive is me going down the research hole
-            and sending you what I find — the art, the method, the chemistry,
-            the geography, and the memory — sealed in an envelope, once a month.
-          </p>
-        </div>
+        <div
+          ref={ref}
+          className={`archival-blur ${inView ? 'is-revealed' : ''}`}
+        >
+          <div className="space-y-6 text-lg text-ink-soft leading-relaxed">
+            <p>
+              My grandmother kept a jar of lemon pickle on the top shelf of her
+              kitchen, in a spot where the sun hit every afternoon. I never
+              thought about it. It was just there — like the salt, like the
+              matches, like the things that are so ordinary they become
+              invisible.
+            </p>
+            <p>
+              Years later, standing in my own kitchen a thousand miles from hers,
+              I started wondering about that jar. Not the recipe — I had that.
+              The question was <em className="font-display italic text-ink">why</em>. Why salt? Why the sun? Why
+              eleven days and not ten? Why does every culture that grows lemons
+              have some version of this exact thing, and why did they all arrive
+              at it on their own?
+            </p>
+            <p>
+              One question became five. Five became a painting, a science card, a
+              history, a letter. That's the whole project. Marginalia is what
+              happens when you take the ingredient in the corner of the page —
+              the one the recipe doesn't bother to explain — and give it the
+              attention it quietly deserves.
+            </p>
+            <p>
+              I'm not a historian or a scientist. I'm a painter who got curious
+              and couldn't stop. Each archive is me going down the research hole
+              and sending you what I find — the art, the method, the chemistry,
+              the geography, and the memory — sealed in an envelope, once a month.
+            </p>
+          </div>
 
-        <div className="mt-12 pl-6 border-l-2 border-accent/30">
-          <MarginNote className="text-2xl">
-            from my kitchen to yours —
-          </MarginNote>
+          <div className="mt-12 pl-6 border-l-2 border-accent/30">
+            <MarginNote className="text-2xl">
+              from my kitchen to yours —
+            </MarginNote>
+          </div>
         </div>
       </div>
     </section>
@@ -418,9 +466,11 @@ function WhyMarginalia() {
 }
 
 /* ═══════════════════════════════════════════════════ */
-/*  6. READING ROOM — featured essay                     */
+/*  6. READING ROOM                                      */
 /* ═══════════════════════════════════════════════════ */
 function ReadingRoom() {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
   return (
     <section className="py-32 md:py-40 px-6 rule-bottom">
       <div className="max-w-8xl mx-auto">
@@ -434,8 +484,8 @@ function ReadingRoom() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1.3fr] gap-12 md:gap-20 items-center">
-          <div className="relative">
+        <div ref={ref} className="grid md:grid-cols-[1fr_1.3fr] gap-12 md:gap-20 items-center">
+          <div className={`archival-blur ${inView ? 'is-revealed' : ''}`}>
             <div className="relative aspect-[3/4] overflow-hidden bg-paper-deep">
               <img
                 src={readingRoomArticle.image}
@@ -448,7 +498,7 @@ function ReadingRoom() {
               <CatalogLabel>{readingRoomArticle.catalog}</CatalogLabel>
             </div>
           </div>
-          <div>
+          <div className={`archival-blur ${inView ? 'is-revealed' : ''}`} style={{ transitionDelay: '0.25s' }}>
             <div className="flex items-center gap-4 mb-6">
               <CatalogLabel className="text-accent">Essay</CatalogLabel>
               <span className="text-ink-faint">·</span>
@@ -462,9 +512,9 @@ function ReadingRoom() {
             <p className="text-ink-soft leading-relaxed mb-10 text-lg">
               {readingRoomArticle.excerpt}
             </p>
-            <button className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.16em] uppercase text-accent hover:text-ink transition-colors group border-b border-accent/30 pb-1">
+            <button className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.16em] uppercase text-accent hover:text-ink transition-colors duration-500 group border-b border-accent/30 pb-1 tactile">
               Continue Reading
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" />
             </button>
           </div>
         </div>
@@ -474,9 +524,11 @@ function ReadingRoom() {
 }
 
 /* ═══════════════════════════════════════════════════ */
-/*  7. FROM THE SKETCHBOOK — works in progress           */
+/*  7. FROM THE SKETCHBOOK                                */
 /* ═══════════════════════════════════════════════════ */
 function Sketchbook() {
+  const { ref, inView } = useInView<HTMLDivElement>();
+
   return (
     <section className="py-32 md:py-40 px-6 bg-paper-warm rule-bottom">
       <div className="max-w-8xl mx-auto">
@@ -490,14 +542,15 @@ function Sketchbook() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <div ref={ref} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {sketchbook.map((item, i) => (
             <div key={item.id} className="group">
               <div className="relative overflow-hidden bg-paper-deep aspect-square mb-4">
                 <img
                   src={item.image}
                   alt={item.caption}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className={`w-full h-full object-cover img-soft ${inView ? 'is-revealed' : ''}`}
+                  style={{ transitionDelay: `${i * 100}ms` }}
                 />
                 <span className="absolute top-2 left-2 font-mono text-[9px] text-paper bg-ink/60 px-1.5 py-0.5 tracking-[0.04em]">
                   {item.catalog}
@@ -524,7 +577,7 @@ function Sketchbook() {
 }
 
 /* ═══════════════════════════════════════════════════ */
-/*  8. MARGIN NOTES — newsletter                        */
+/*  8. MARGIN NOTES                                      */
 /* ═══════════════════════════════════════════════════ */
 function MarginNotes() {
   return (
@@ -550,11 +603,11 @@ function MarginNotes() {
             type="email"
             required
             placeholder="your email"
-            className="flex-1 px-5 py-3.5 bg-transparent border border-rule text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent transition-colors font-mono text-sm"
+            className="flex-1 px-5 py-3.5 bg-transparent border border-rule text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent transition-colors duration-500 font-mono text-sm"
           />
           <button
             type="submit"
-            className="px-8 py-3.5 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-300"
+            className="px-8 py-3.5 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-500 tactile"
           >
             Subscribe
           </button>

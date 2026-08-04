@@ -1,39 +1,59 @@
 import Seal from '@/components/Seal';
-import { aboutPortrait } from '@/data';
+import {
+  RegistrationMark,
+  CatalogLabel,
+  DateStamp,
+  MarginNote,
+  CornerMarks,
+  SectionNumber,
+} from '@/components/ArchivalMarks';
+import { aboutPortrait, archiveOne } from '@/data';
 
 export default function About() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative h-[55vh] flex items-end overflow-hidden">
+      <section className="relative h-[60vh] flex items-end overflow-hidden">
         <img
           src={aboutPortrait}
           alt="The studio"
           className="absolute inset-0 w-full h-full object-cover scale-in"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
-        <div className="relative z-10 px-6 pb-12 max-w-7xl mx-auto w-full">
-          <p className="font-mono text-xs tracking-[0.14em] uppercase text-parchment/80 mb-4 fade-in">
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-ink/30" />
+
+        {/* Top metadata bar */}
+        <div className="absolute top-0 left-0 right-0 z-10 px-6 pt-24 pb-4">
+          <div className="max-w-8xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <RegistrationMark size={12} color="rgba(250,250,247,0.5)" />
+              <CatalogLabel className="text-paper/60">MGNL-ABT · The Studio</CatalogLabel>
+            </div>
+            <DateStamp className="text-paper/60">Est. 2024</DateStamp>
+          </div>
+        </div>
+
+        <div className="relative z-10 px-6 pb-16 md:pb-20 max-w-8xl mx-auto w-full">
+          <p className="font-mono text-xs tracking-[0.2em] uppercase text-paper/70 mb-4 fade-in">
             The Studio
           </p>
-          <h1 className="font-display italic font-medium text-parchment text-5xl md:text-6xl tracking-wide fade-up">
+          <h1 className="font-display font-light text-paper text-6xl md:text-8xl lg:text-9xl tracking-tight fade-up leading-[0.92]">
             About
           </h1>
         </div>
       </section>
 
-      {/* Personal story — replaces artist bio */}
-      <section className="py-24 md:py-32 px-6 border-b border-rule">
+      {/* Personal story */}
+      <section className="py-32 md:py-40 px-6 rule-bottom">
         <div className="max-w-3xl mx-auto">
-          <div className="flex justify-center mb-10">
-            <Seal size={64} />
+          <div className="flex items-start gap-8 mb-16">
+            <SectionNumber num="01" className="flex-shrink-0 -ml-2" />
+            <div className="pt-6">
+              <CatalogLabel className="text-accent">The Story</CatalogLabel>
+              <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
+                Why I started annotating the margins.
+              </h2>
+            </div>
           </div>
-          <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-4 text-center">
-            The Story
-          </h2>
-          <h3 className="font-display italic text-3xl md:text-4xl text-center text-ink mb-12 text-balance">
-            Why I started annotating the margins.
-          </h3>
 
           <div className="space-y-6 text-lg text-ink-soft leading-relaxed">
             <p>
@@ -79,51 +99,66 @@ export default function About() {
             </p>
           </div>
 
-          <p className="font-script text-2xl text-indigo text-center mt-12">
-            from my kitchen to yours —
-          </p>
+          <div className="mt-12 pl-6 border-l-2 border-accent/30">
+            <MarginNote className="text-2xl">
+              from my kitchen to yours —
+            </MarginNote>
+          </div>
         </div>
       </section>
 
-      {/* The practice — rail layout */}
-      <section className="py-24 px-6 bg-parchment-deep/40 border-t border-rule">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_200px] gap-12 md:gap-14">
-          <div>
-            <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-8">
-              The Practice
-            </h2>
-            <p className="font-display italic text-xl md:text-2xl text-ink-soft leading-relaxed mb-6 max-w-2xl">
-              Each archive starts with an ingredient I can't stop thinking
-              about — something small, something from the corner of a recipe,
-              something that deserves more attention than it usually gets.
-            </p>
-            <p className="text-ink-soft leading-relaxed max-w-2xl">
-              I paint it, research its history, write about it like a letter to
-              a friend, and send it all to you in an envelope. The seal and the
-              caret stay the same every month. The painting and the story are
-              the only things that change — so each archive feels like a new
-              page in the same book.
-            </p>
+      {/* The practice */}
+      <section className="py-32 md:py-40 px-6 bg-paper-warm">
+        <div className="max-w-8xl mx-auto">
+          <div className="flex items-start gap-8 mb-16">
+            <SectionNumber num="02" className="flex-shrink-0 -ml-2" />
+            <div className="pt-6">
+              <CatalogLabel className="text-accent">The Practice</CatalogLabel>
+              <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
+                How each archive is made.
+              </h2>
+            </div>
           </div>
-          <div className="md:border-t md:border-rule md:pt-4">
-            <p className="font-mono text-xs text-madder leading-relaxed uppercase tracking-[0.03em]">
-              <span className="text-zari tracking-[4px]">✦ ✦ ✦</span>
-              <br />
-              <br />
-              <b className="text-ink">archive 001</b>
-              <br />
-              lemon pickle
-              <br />
-              <br />
-              <b className="text-ink">archive 002</b>
-              <br />
-              mustard seeds — spring
-              <br />
-              <br />
-              <b className="text-ink">archive 003</b>
-              <br />
-              tamarind — summer
-            </p>
+
+          <div className="grid md:grid-cols-[1fr_280px] gap-12 md:gap-20">
+            <div>
+              <p className="font-display italic text-xl md:text-2xl text-ink-soft leading-relaxed mb-8 max-w-2xl">
+                Each archive starts with an ingredient I can't stop thinking
+                about — something small, something from the corner of a recipe,
+                something that deserves more attention than it usually gets.
+              </p>
+              <p className="text-ink-soft leading-relaxed max-w-2xl text-lg">
+                I paint it, research its history, write about it like a letter to
+                a friend, and send it all to you in an envelope. The seal and
+                the caret stay the same every month. The painting and the story
+                are the only things that change — so each archive feels like a
+                new page in the same book.
+              </p>
+            </div>
+
+            {/* Archive rail */}
+            <div className="md:border-l md:border-rule md:pl-10">
+              <CatalogLabel className="text-accent mb-4 block">Upcoming</CatalogLabel>
+              <div className="space-y-5">
+                {[
+                  { num: '001', title: 'Lemon Pickle', date: 'Spring 2025' },
+                  { num: '002', title: 'Mustard Seeds', date: 'Spring 2025' },
+                  { num: '003', title: 'Tamarind', date: 'Summer 2025' },
+                  { num: '004', title: 'Khichdi', date: 'Monsoon 2025' },
+                  { num: '005', title: 'Curry Leaves', date: 'Autumn 2025' },
+                ].map((item) => (
+                  <div key={item.num} className="flex items-baseline gap-3">
+                    <span className="font-mono text-xs text-accent tracking-[0.1em] w-8">
+                      {item.num}
+                    </span>
+                    <div>
+                      <p className="font-display text-ink">{item.title}</p>
+                      <DateStamp>{item.date}</DateStamp>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -18,7 +18,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-parchment">
+    <div className="min-h-screen flex flex-col bg-paper">
       <Header onNavigate={navigate} current={page} />
       <main className="flex-1">
         {page === 'home' && <Home onNavigate={navigate} />}

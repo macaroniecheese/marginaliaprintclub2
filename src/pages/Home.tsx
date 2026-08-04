@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
 import Seal from '@/components/Seal';
 import {
+  RegistrationMark,
+  CatalogLabel,
+  DateStamp,
+  MarginNote,
+  CornerMarks,
+  SectionNumber,
+} from '@/components/ArchivalMarks';
+import {
   archiveOne,
   envelopeContents,
   archiveIndex,
@@ -16,140 +24,147 @@ type Props = {
 export default function Home({ onNavigate }: Props) {
   return (
     <div className="paper-texture">
-      {/* 1. HERO */}
       <Hero onNavigate={onNavigate} />
-
-      {/* 2. WHAT'S INSIDE THE ARCHIVE */}
       <WhatsInside />
-
-      {/* 3. ARCHIVE NO. 001 */}
       <ArchiveFeature onNavigate={onNavigate} />
-
-      {/* 4. ARCHIVE INDEX */}
       <ArchiveIndexSection />
-
-      {/* 5. WHY MARGINALIA EXISTS */}
       <WhyMarginalia />
-
-      {/* 6. READING ROOM */}
       <ReadingRoom />
-
-      {/* 7. FROM THE SKETCHBOOK */}
       <Sketchbook />
-
-      {/* 8. MARGIN NOTES (newsletter) */}
       <MarginNotes />
     </div>
   );
 }
 
-/* ──────────────────────────────────────────── */
-/*  1. HERO                                     */
-/* ──────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════ */
+/*  1. HERO — artwork is the hero, oversized type       */
+/* ═══════════════════════════════════════════════════ */
 function Hero({ onNavigate }: { onNavigate: (page: string) => void }) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-end overflow-hidden">
       <img
         src={archiveOne.heroImage}
         alt={archiveOne.heroImageAlt}
         className="absolute inset-0 w-full h-full object-cover scale-in"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/20 to-ink/50" />
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">
-        <p className="font-mono text-xs tracking-[0.14em] uppercase text-parchment/80 mb-8 fade-in">
-          {archiveOne.number} · {archiveOne.title}
-        </p>
-        <h1 className="font-display italic font-medium text-parchment text-5xl md:text-7xl lg:text-8xl tracking-wide leading-[0.95] fade-up text-balance">
-          Every recipe tells a bigger story.
-        </h1>
-        <p className="font-display italic text-parchment/85 text-lg md:text-xl mt-8 max-w-2xl mx-auto leading-relaxed fade-up">
-          Each month, subscribers receive a new archive — one ingredient
-          explored through fine art, recipes, science, history, geography, and
-          a personal letter. Not a box of products. A way of looking.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12 fade-up">
-          <button
-            onClick={() => onNavigate('archive')}
-            className="px-10 py-4 bg-madder text-parchment font-mono text-xs tracking-[0.14em] uppercase hover:bg-ink transition-colors"
-          >
-            Become an Archivist
-          </button>
-          <button
-            onClick={() => onNavigate('archive')}
-            className="px-10 py-4 border border-parchment/60 text-parchment font-mono text-xs tracking-[0.14em] uppercase hover:bg-parchment hover:text-ink transition-colors"
-          >
-            Explore Archive No. 001
-          </button>
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-ink/30" />
+
+      {/* Top metadata bar */}
+      <div className="absolute top-0 left-0 right-0 z-10 px-6 pt-24 pb-4">
+        <div className="max-w-8xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <RegistrationMark size={12} color="rgba(250,250,247,0.5)" />
+            <CatalogLabel className="text-paper/60">{archiveOne.catalogId}</CatalogLabel>
+          </div>
+          <DateStamp className="text-paper/60">{archiveOne.date}</DateStamp>
         </div>
-        <p className="font-mono text-[11px] text-parchment/50 mt-8 tracking-[0.1em] uppercase">
-          Archive No. 002 — Mustard Seeds — arrives this spring
-        </p>
+      </div>
+
+      {/* Bottom content */}
+      <div className="relative z-10 w-full px-6 pb-16 md:pb-24">
+        <div className="max-w-8xl mx-auto">
+          <p className="font-mono text-xs tracking-[0.2em] uppercase text-paper/70 mb-6 fade-in">
+            {archiveOne.number} — {archiveOne.title}
+          </p>
+          <h1 className="font-display font-light text-paper text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight fade-up max-w-5xl text-balance">
+            Every recipe tells a bigger story.
+          </h1>
+          <p className="font-display italic font-light text-paper/80 text-lg md:text-2xl mt-8 max-w-2xl leading-relaxed fade-up">
+            Each month, subscribers receive a new archive — one ingredient
+            explored through fine art, recipes, science, history, geography, and
+            a personal letter. Not a box of products. A way of looking.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 mt-12 fade-up">
+            <button
+              onClick={() => onNavigate('archive')}
+              className="px-10 py-4 bg-paper text-ink font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent hover:text-paper transition-colors duration-300"
+            >
+              Become an Archivist
+            </button>
+            <button
+              onClick={() => onNavigate('archive')}
+              className="px-10 py-4 border border-paper/30 text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-paper/10 transition-colors duration-300"
+            >
+              Explore Archive No. 001
+            </button>
+          </div>
+          <p className="font-mono text-[11px] text-paper/40 mt-8 tracking-[0.1em] uppercase">
+            No. 002 — Mustard Seeds — arrives this spring
+          </p>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ──────────────────────────────────────────── */
-/*  2. WHAT'S INSIDE THE ARCHIVE                 */
-/* ──────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════ */
+/*  2. WHAT'S INSIDE — archival envelope reveal        */
+/* ═══════════════════════════════════════════════════ */
 function WhatsInside() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="py-24 md:py-32 px-6 border-b border-rule">
+    <section className="py-32 md:py-40 px-6 rule-bottom">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-4">
-            What's Inside the Archive
-          </h2>
-          <p className="font-display italic text-3xl md:text-4xl text-ink-soft text-balance">
-            Open the envelope. Five pieces, one ingredient, one story.
-          </p>
+        {/* Section header */}
+        <div className="flex items-start gap-8 mb-20">
+          <SectionNumber num="01" className="flex-shrink-0 -ml-2" />
+          <div className="pt-6">
+            <CatalogLabel className="text-accent">Contents of the Envelope</CatalogLabel>
+            <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
+              Open the envelope.<br />
+              <span className="italic text-ink-soft">Five pieces, one ingredient.</span>
+            </h2>
+          </div>
         </div>
 
-        {/* Envelope stack — click to reveal each piece */}
-        <div className="space-y-3">
+        {/* Envelope stack */}
+        <div className="space-y-1">
           {envelopeContents.map((item, i) => {
             const isOpen = open === i;
             return (
               <div
                 key={item.id}
-                className={`border border-rule bg-parchment transition-all duration-500 ${
-                  isOpen ? 'shadow-lg' : ''
+                className={`border-t border-rule transition-colors duration-300 ${
+                  isOpen ? 'bg-paper-warm' : 'bg-transparent'
                 }`}
               >
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center gap-6 p-5 md:p-6 text-left group"
+                  className="w-full flex items-center gap-6 md:gap-10 py-6 md:py-8 text-left group"
                 >
+                  {/* Catalog number */}
+                  <CatalogLabel className="hidden md:block w-20 flex-shrink-0 text-ink-faint">
+                    {item.catalog}
+                  </CatalogLabel>
+
                   {/* Thumbnail */}
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 overflow-hidden bg-parchment-deep border border-rule">
+                  <div className="relative w-14 h-14 md:w-16 md:h-16 flex-shrink-0 overflow-hidden bg-paper-deep">
                     <img
                       src={item.image}
                       alt={item.label}
                       className={`w-full h-full object-cover transition-all duration-700 ${
-                        isOpen ? 'scale-100' : 'scale-90 opacity-60'
+                        isOpen ? 'opacity-100' : 'opacity-50 grayscale group-hover:opacity-80 group-hover:grayscale-0'
                       }`}
                     />
-                    <span className="absolute inset-0 flex items-center justify-center bg-ink/0 group-hover:bg-ink/10 transition-colors" />
                   </div>
 
                   {/* Label */}
                   <div className="flex-1 min-w-0">
-                    <p className="font-mono text-[10px] tracking-[0.1em] uppercase text-madder mb-1">
+                    <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-accent">
                       {item.fig}
-                    </p>
-                    <h3 className="font-display italic text-xl md:text-2xl text-ink">
+                    </span>
+                    <h3 className="font-display text-xl md:text-2xl text-ink mt-0.5">
                       {item.label}
                     </h3>
                   </div>
 
                   {/* Toggle */}
-                  <div className="flex-shrink-0 text-ink-soft">
+                  <div className="flex-shrink-0 text-ink-light">
                     {isOpen ? (
-                      <Minus className="w-5 h-5" />
+                      <Minus className="w-4 h-4" />
                     ) : (
-                      <Plus className="w-5 h-5 group-hover:text-madder transition-colors" />
+                      <Plus className="w-4 h-4 group-hover:text-accent transition-colors" />
                     )}
                   </div>
                 </button>
@@ -157,24 +172,24 @@ function WhatsInside() {
                 {/* Reveal panel */}
                 <div
                   className={`grid transition-all duration-500 ease-out ${
-                    isOpen
-                      ? 'grid-rows-[1fr] opacity-100'
-                      : 'grid-rows-[0fr] opacity-0'
+                    isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-5 md:px-6 pb-6 md:pb-8 pl-5 md:pl-[7.5rem]">
-                      <div className="flex flex-col md:flex-row gap-6 items-start">
-                        <div className="w-full md:w-48 aspect-[3/2] overflow-hidden bg-parchment-deep border border-rule flex-shrink-0">
-                          <img
-                            src={item.image}
-                            alt={item.label}
-                            className="w-full h-full object-cover"
-                          />
+                    <div className="pb-8 pl-0 md:pl-[10.5rem]">
+                      <div className="flex flex-col md:flex-row gap-8 items-start">
+                        <div className="relative w-full md:w-56 aspect-[3/2] overflow-hidden bg-paper-deep flex-shrink-0">
+                          <img src={item.image} alt={item.label} className="w-full h-full object-cover" />
+                          <CornerMarks />
                         </div>
-                        <p className="text-ink-soft leading-relaxed text-base md:text-lg">
-                          {item.note}
-                        </p>
+                        <div>
+                          <p className="text-ink-soft leading-relaxed text-base md:text-lg max-w-md">
+                            {item.note}
+                          </p>
+                          <MarginNote className="mt-4 block">
+                            {isOpen ? '↳ see the envelope for the full version' : ''}
+                          </MarginNote>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -183,63 +198,80 @@ function WhatsInside() {
             );
           })}
         </div>
+        <div className="border-t border-rule" />
 
-        <p className="font-mono text-xs text-ink-soft/70 mt-10 text-center max-w-md mx-auto leading-relaxed">
-          Each piece is printed on archival paper, annotated by hand, and
-          sealed with the Marginalia mark. The envelope is part of the object.
+        <p className="font-mono text-xs text-ink-faint mt-10 max-w-md leading-relaxed">
+          Each piece is printed on archival paper, annotated by hand, and sealed
+          with the Marginalia mark. The envelope is part of the object.
         </p>
       </div>
     </section>
   );
 }
 
-/* ──────────────────────────────────────────── */
-/*  3. ARCHIVE NO. 001                           */
-/* ──────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════ */
+/*  3. ARCHIVE NO. 001 — the current issue              */
+/* ═══════════════════════════════════════════════════ */
 function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) {
   return (
-    <section className="py-24 md:py-32 px-6 bg-parchment-deep/30 border-b border-rule">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-[1.2fr_1fr] gap-12 md:gap-16 items-center">
-          {/* Artwork */}
+    <section className="py-32 md:py-40 px-6 bg-paper-warm rule-bottom">
+      <div className="max-w-8xl mx-auto">
+        {/* Section header */}
+        <div className="flex items-start gap-8 mb-20">
+          <SectionNumber num="02" className="flex-shrink-0 -ml-2" />
+          <div className="pt-6">
+            <CatalogLabel className="text-accent">The Current Archive</CatalogLabel>
+            <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight">
+              Archive No. 001
+            </h2>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-[1.3fr_1fr] gap-12 md:gap-20 items-start">
+          {/* Artwork — the hero */}
           <div className="relative">
-            <div className="aspect-[4/5] overflow-hidden bg-parchment-deep border border-rule">
+            <div className="relative aspect-[4/5] overflow-hidden bg-paper-deep">
               <img
                 src={archiveOne.heroImage}
                 alt={archiveOne.title}
                 className="w-full h-full object-cover"
               />
+              <CornerMarks />
             </div>
-            <span className="absolute top-4 right-4 font-mono text-[10px] text-parchment bg-ink/55 px-2 py-1 tracking-[0.04em]">
-              {archiveOne.number}
-            </span>
+            {/* Museum caption */}
+            <div className="mt-4 flex items-start gap-4">
+              <RegistrationMark size={10} color="rgba(26,26,26,0.4)" className="mt-1 flex-shrink-0" />
+              <div>
+                <CatalogLabel>{archiveOne.catalogId} · {archiveOne.date}</CatalogLabel>
+                <p className="font-display italic text-ink mt-1">
+                  {archiveOne.title}, <span className="text-ink-light">oil on linen</span>
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Details */}
-          <div>
-            <p className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-4">
-              The Current Archive
-            </p>
-            <h2 className="font-display italic font-medium text-4xl md:text-5xl text-ink mb-3">
+          <div className="md:pt-8">
+            <h3 className="font-display italic font-light text-5xl md:text-6xl text-ink mb-4 leading-[0.95] tracking-tight">
               {archiveOne.title}
-            </h2>
-            <p className="font-display italic text-lg text-ink-soft mb-8">
+            </h3>
+            <p className="font-display italic text-xl text-ink-light mb-10">
               {archiveOne.subtitle}
             </p>
-            <p className="text-ink-soft leading-relaxed mb-10">
+            <p className="text-ink-soft leading-relaxed mb-10 text-lg">
               {archiveOne.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => onNavigate('archive')}
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-madder text-parchment font-mono text-xs tracking-[0.14em] uppercase hover:bg-ink transition-colors group"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-300 group"
               >
-                Subscribe — Archive No. 001
+                Subscribe — No. 001
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
               <button
                 onClick={() => onNavigate('archive')}
-                className="px-8 py-3.5 border border-ink font-mono text-xs tracking-[0.14em] uppercase hover:bg-ink hover:text-parchment transition-colors"
+                className="px-8 py-3.5 border border-rule font-mono text-xs tracking-[0.16em] uppercase text-ink-soft hover:border-ink hover:text-ink transition-colors duration-300"
               >
                 Read the Full Archive
               </button>
@@ -251,74 +283,73 @@ function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) 
   );
 }
 
-/* ──────────────────────────────────────────── */
-/*  4. ARCHIVE INDEX                            */
-/* ──────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════ */
+/*  4. ARCHIVE INDEX — collectible grid                 */
+/* ═══════════════════════════════════════════════════ */
 function ArchiveIndexSection() {
   return (
-    <section className="py-24 md:py-32 px-6 border-b border-rule">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-4">
-            Archive Index
-          </h2>
-          <p className="font-display italic text-3xl md:text-4xl text-ink-soft text-balance">
-            Where the investigation goes next.
-          </p>
+    <section className="py-32 md:py-40 px-6 rule-bottom">
+      <div className="max-w-8xl mx-auto">
+        <div className="flex items-start gap-8 mb-20">
+          <SectionNumber num="03" className="flex-shrink-0 -ml-2" />
+          <div className="pt-6">
+            <CatalogLabel className="text-accent">The Archive Index</CatalogLabel>
+            <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
+              Where the investigation goes next.
+            </h2>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
           {archiveIndex.map((entry) => {
             const available = entry.status === 'available';
             return (
-              <div
-                key={entry.number}
-                className="group cursor-default"
-              >
-                <div className="relative overflow-hidden bg-parchment-deep mb-5 aspect-[4/3] border border-rule">
+              <div key={entry.number} className="group">
+                <div className="relative overflow-hidden bg-paper-deep mb-5 aspect-[4/3]">
                   <img
                     src={entry.image}
                     alt={entry.title}
-                    className={`w-full h-full object-cover transition-transform duration-700 ${
+                    className={`w-full h-full object-cover transition-all duration-700 ${
                       available
                         ? 'group-hover:scale-105'
-                        : 'grayscale opacity-50 group-hover:opacity-70 group-hover:grayscale-0 transition-all duration-700'
+                        : 'grayscale opacity-40 group-hover:opacity-60 group-hover:grayscale-0'
                     }`}
                   />
                   <span
-                    className={`absolute top-3 right-3 font-mono text-[10px] px-2.5 py-1 tracking-[0.06em] uppercase ${
-                      available
-                        ? 'bg-madder text-parchment'
-                        : 'bg-ink/60 text-parchment/80'
+                    className={`absolute top-3 left-3 font-mono text-[10px] px-2.5 py-1 tracking-[0.08em] uppercase ${
+                      available ? 'bg-accent text-paper' : 'bg-ink/70 text-paper/80'
                     }`}
                   >
                     {available ? 'Available' : 'Coming Soon'}
                   </span>
                 </div>
-                <div className="flex items-baseline gap-3 mb-1">
-                  <span className="font-mono text-xs text-madder tracking-[0.1em]">
+                {/* Museum caption */}
+                <div className="flex items-baseline gap-3 mb-2">
+                  <CatalogLabel className="text-accent">{entry.catalog}</CatalogLabel>
+                  <span className="text-ink-faint">·</span>
+                  <DateStamp>{entry.date}</DateStamp>
+                </div>
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-sm text-accent tracking-[0.1em]">
                     {entry.number}
                   </span>
-                  <span className="font-mono text-[10px] text-ink-soft/50">
-                    —
-                  </span>
-                  <span className="font-mono text-[10px] text-ink-soft/70 tracking-[0.06em] uppercase">
-                    {entry.note}
-                  </span>
+                  <h3
+                    className={`font-display text-2xl md:text-3xl ${
+                      available ? 'text-ink' : 'text-ink-light'
+                    }`}
+                  >
+                    {entry.title}
+                  </h3>
                 </div>
-                <h3
-                  className={`font-display italic text-2xl ${
-                    available ? 'text-ink' : 'text-ink-soft/70'
-                  }`}
-                >
-                  {entry.title}
-                </h3>
+                <p className="font-mono text-[11px] text-ink-faint mt-1 tracking-[0.04em] uppercase">
+                  {entry.note}
+                </p>
               </div>
             );
           })}
         </div>
 
-        <p className="font-mono text-xs text-ink-soft/60 mt-14 text-center max-w-lg mx-auto leading-relaxed">
+        <p className="font-mono text-xs text-ink-faint mt-16 max-w-lg leading-relaxed">
           The index grows by one each month. Future investigations are teased,
           not stocked — each ingredient earns its place when the painting and
           the research are done.
@@ -328,22 +359,22 @@ function ArchiveIndexSection() {
   );
 }
 
-/* ──────────────────────────────────────────── */
-/*  5. WHY MARGINALIA EXISTS                     */
-/* ──────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════ */
+/*  5. WHY MARGINALIA EXISTS — personal story           */
+/* ═══════════════════════════════════════════════════ */
 function WhyMarginalia() {
   return (
-    <section className="py-24 md:py-32 px-6 bg-parchment-deep/30 border-b border-rule">
+    <section className="py-32 md:py-40 px-6 bg-paper-warm rule-bottom">
       <div className="max-w-3xl mx-auto">
-        <div className="flex justify-center mb-10">
-          <Seal size={64} />
+        <div className="flex items-start gap-8 mb-16">
+          <SectionNumber num="04" className="flex-shrink-0 -ml-2" />
+          <div className="pt-6">
+            <CatalogLabel className="text-accent">Editor's Note</CatalogLabel>
+            <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
+              Why Marginalia exists.
+            </h2>
+          </div>
         </div>
-        <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-4 text-center">
-          Why Marginalia Exists
-        </h2>
-        <h3 className="font-display italic text-3xl md:text-4xl text-center text-ink mb-12 text-balance">
-          It started with a jar of pickle and a question I couldn't put down.
-        </h3>
 
         <div className="space-y-6 text-lg text-ink-soft leading-relaxed">
           <p>
@@ -356,9 +387,10 @@ function WhyMarginalia() {
           <p>
             Years later, standing in my own kitchen a thousand miles from hers,
             I started wondering about that jar. Not the recipe — I had that.
-            The question was why. Why salt? Why the sun? Why eleven days and
-            not ten? Why does every culture that grows lemons have some version
-            of this exact thing, and why did they all arrive at it on their own?
+            The question was <em className="font-display italic text-ink">why</em>. Why salt? Why the sun? Why
+            eleven days and not ten? Why does every culture that grows lemons
+            have some version of this exact thing, and why did they all arrive
+            at it on their own?
           </p>
           <p>
             One question became five. Five became a painting, a science card, a
@@ -375,49 +407,62 @@ function WhyMarginalia() {
           </p>
         </div>
 
-        <p className="font-script text-2xl text-indigo text-center mt-12">
-          from my kitchen to yours —
-        </p>
+        <div className="mt-12 pl-6 border-l-2 border-accent/30">
+          <MarginNote className="text-2xl">
+            from my kitchen to yours —
+          </MarginNote>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ──────────────────────────────────────────── */
-/*  6. READING ROOM                             */
-/* ──────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════ */
+/*  6. READING ROOM — featured essay                     */
+/* ═══════════════════════════════════════════════════ */
 function ReadingRoom() {
   return (
-    <section className="py-24 md:py-32 px-6 border-b border-rule">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-4">
-            Reading Room
-          </h2>
-          <p className="font-display italic text-3xl md:text-4xl text-ink-soft text-balance">
-            A short piece, for the table.
-          </p>
+    <section className="py-32 md:py-40 px-6 rule-bottom">
+      <div className="max-w-8xl mx-auto">
+        <div className="flex items-start gap-8 mb-20">
+          <SectionNumber num="05" className="flex-shrink-0 -ml-2" />
+          <div className="pt-6">
+            <CatalogLabel className="text-accent">Reading Room</CatalogLabel>
+            <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
+              A short piece, for the table.
+            </h2>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1.3fr] gap-10 md:gap-14 items-center">
-          <div className="aspect-[3/4] overflow-hidden bg-parchment-deep border border-rule">
-            <img
-              src={readingRoomArticle.image}
-              alt={readingRoomArticle.title}
-              className="w-full h-full object-cover"
-            />
+        <div className="grid md:grid-cols-[1fr_1.3fr] gap-12 md:gap-20 items-center">
+          <div className="relative">
+            <div className="relative aspect-[3/4] overflow-hidden bg-paper-deep">
+              <img
+                src={readingRoomArticle.image}
+                alt={readingRoomArticle.title}
+                className="w-full h-full object-cover"
+              />
+              <CornerMarks />
+            </div>
+            <div className="mt-4">
+              <CatalogLabel>{readingRoomArticle.catalog}</CatalogLabel>
+            </div>
           </div>
           <div>
-            <p className="font-mono text-[11px] tracking-[0.1em] uppercase text-ink-soft/60 mb-4">
-              Essay · {readingRoomArticle.readTime}
-            </p>
-            <h3 className="font-display italic text-3xl md:text-4xl text-ink mb-6 leading-tight text-balance">
+            <div className="flex items-center gap-4 mb-6">
+              <CatalogLabel className="text-accent">Essay</CatalogLabel>
+              <span className="text-ink-faint">·</span>
+              <DateStamp>{readingRoomArticle.date}</DateStamp>
+              <span className="text-ink-faint">·</span>
+              <DateStamp>{readingRoomArticle.readTime}</DateStamp>
+            </div>
+            <h3 className="font-display font-light text-3xl md:text-5xl text-ink mb-8 leading-[0.95] tracking-tight text-balance">
               {readingRoomArticle.title}
             </h3>
-            <p className="text-ink-soft leading-relaxed mb-8">
+            <p className="text-ink-soft leading-relaxed mb-10 text-lg">
               {readingRoomArticle.excerpt}
             </p>
-            <button className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-madder hover:text-ink transition-colors group">
+            <button className="inline-flex items-center gap-2 font-mono text-xs tracking-[0.16em] uppercase text-accent hover:text-ink transition-colors group border-b border-accent/30 pb-1">
               Continue Reading
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -428,46 +473,47 @@ function ReadingRoom() {
   );
 }
 
-/* ──────────────────────────────────────────── */
-/*  7. FROM THE SKETCHBOOK                       */
-/* ──────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════ */
+/*  7. FROM THE SKETCHBOOK — works in progress           */
+/* ═══════════════════════════════════════════════════ */
 function Sketchbook() {
   return (
-    <section className="py-24 md:py-32 px-6 bg-parchment-deep/30 border-b border-rule">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-4">
-            From the Sketchbook
-          </h2>
-          <p className="font-display italic text-3xl md:text-4xl text-ink-soft text-balance">
-            Works in progress, before they become an archive.
-          </p>
+    <section className="py-32 md:py-40 px-6 bg-paper-warm rule-bottom">
+      <div className="max-w-8xl mx-auto">
+        <div className="flex items-start gap-8 mb-20">
+          <SectionNumber num="06" className="flex-shrink-0 -ml-2" />
+          <div className="pt-6">
+            <CatalogLabel className="text-accent">From the Sketchbook</CatalogLabel>
+            <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
+              Works in progress, before they become an archive.
+            </h2>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {sketchbook.map((item, i) => (
-            <div
-              key={item.id}
-              className="group"
-            >
-              <div className="relative overflow-hidden bg-parchment-deep aspect-square border border-rule mb-3">
+            <div key={item.id} className="group">
+              <div className="relative overflow-hidden bg-paper-deep aspect-square mb-4">
                 <img
                   src={item.image}
                   alt={item.caption}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <span className="absolute top-2 right-2 font-mono text-[9px] text-parchment bg-ink/50 px-1.5 py-0.5 tracking-[0.04em]">
-                  {String(i + 1).padStart(2, '0')}
+                <span className="absolute top-2 left-2 font-mono text-[9px] text-paper bg-ink/60 px-1.5 py-0.5 tracking-[0.04em]">
+                  {item.catalog}
                 </span>
               </div>
-              <p className="font-mono text-[11px] text-ink-soft leading-relaxed">
-                {item.caption}
-              </p>
+              <div className="flex items-baseline gap-2">
+                <CatalogLabel className="text-ink-faint">{String(i + 1).padStart(2, '0')}</CatalogLabel>
+                <p className="font-mono text-[11px] text-ink-soft leading-relaxed">
+                  {item.caption}
+                </p>
+              </div>
             </div>
           ))}
         </div>
 
-        <p className="font-mono text-xs text-ink-soft/60 mt-12 text-center max-w-md mx-auto leading-relaxed">
+        <p className="font-mono text-xs text-ink-faint mt-14 max-w-md leading-relaxed">
           The sketchbook is where the archive takes shape — first drawings,
           recipe tests, colour studies, and science illustrations before
           they're ready for the envelope.
@@ -477,23 +523,21 @@ function Sketchbook() {
   );
 }
 
-/* ──────────────────────────────────────────── */
-/*  8. MARGIN NOTES (newsletter)                */
-/* ──────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════ */
+/*  8. MARGIN NOTES — newsletter                        */
+/* ═══════════════════════════════════════════════════ */
 function MarginNotes() {
   return (
-    <section className="py-24 md:py-32 px-6">
+    <section className="py-32 md:py-40 px-6">
       <div className="max-w-2xl mx-auto text-center">
-        <div className="flex justify-center mb-8">
-          <Seal size={72} />
+        <div className="flex justify-center mb-10">
+          <Seal size={64} />
         </div>
-        <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-madder mb-4">
-          Margin Notes
-        </h2>
-        <h3 className="font-display italic text-3xl md:text-4xl text-ink mb-6 text-balance">
+        <CatalogLabel className="text-accent">Margin Notes</CatalogLabel>
+        <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 mb-8 leading-[0.95] tracking-tight text-balance">
           Occasional sketches, discoveries, and previews from upcoming archives.
-        </h3>
-        <p className="text-ink-soft leading-relaxed mb-10 max-w-lg mx-auto">
+        </h2>
+        <p className="text-ink-soft leading-relaxed mb-12 max-w-lg mx-auto text-lg">
           Not a newsletter in the usual sense. More like a postcard from the
           studio — a drawing, a finding, or a look at what's coming next. Sent
           now and then, when there's something worth sending.
@@ -506,16 +550,16 @@ function MarginNotes() {
             type="email"
             required
             placeholder="your email"
-            className="flex-1 px-5 py-3 bg-parchment border border-rule text-ink placeholder:text-ink-soft/50 focus:outline-none focus:border-madder transition-colors font-mono text-sm"
+            className="flex-1 px-5 py-3.5 bg-transparent border border-rule text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent transition-colors font-mono text-sm"
           />
           <button
             type="submit"
-            className="px-8 py-3 bg-ink text-parchment font-mono text-xs tracking-[0.14em] uppercase hover:bg-madder transition-colors"
+            className="px-8 py-3.5 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-300"
           >
             Subscribe
           </button>
         </form>
-        <p className="font-mono text-[11px] text-ink-soft/50 mt-6 tracking-[0.06em]">
+        <p className="font-mono text-[11px] text-ink-faint mt-6 tracking-[0.06em]">
           No spam, no schedules. Just notes from the margin.
         </p>
       </div>

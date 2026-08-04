@@ -7,7 +7,7 @@ export const archiveOne = {
   accent: '#9C3427', // madder — pulled from the warm ochre/amber of the painting
   date: 'Spring 2025',
   description:
-    'The first archive opens with the thing in the corner of every South Asian kitchen — a jar of lemon pickle, quietly improving. Before it was a condiment, it was the only way to keep a lemon past its season. This issue traces brine from clay pots to glass jars, across monsoons and migrations, and asks why something so humble has survived every revolution in how we eat.',
+    'Every South Asian kitchen has a jar like this — pushed to the back of a shelf, quietly improving month after month. Nobody talks about it. But before it was a condiment, it was the only way to keep a lemon past its season. This first archive follows brine from clay pots to glass jars, across monsoons and migrations, and asks a simple question: why has something so humble survived every revolution in how we eat?',
   heroImage:
     'https://images.pexels.com/photos/7494618/pexels-photo-7494618.jpeg?auto=compress&cs=tinysrgb&h=1200&w=900',
   heroImageAlt: 'Oil painting study of lemons with art supplies',
@@ -17,45 +17,45 @@ export const archiveOne = {
 export const envelopeContents = [
   {
     id: 'print',
-    label: 'Fine Art Print',
+    label: 'The Painting',
     fig: 'Plate I',
     catalog: 'MGNL-001-PL',
-    note: 'An oil-painted portrait of the ingredient, reproduced on archival cotton paper and hand-signed.',
+    note: 'An oil-painted portrait of the ingredient — the first thing made for every archive, and the thing the rest of the investigation orbits around.',
     image:
       'https://images.pexels.com/photos/32369411/pexels-photo-32369411.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
     id: 'recipe',
-    label: 'Recipe',
+    label: 'The Recipe',
     fig: 'Card II',
     catalog: 'MGNL-001-RC',
-    note: 'The method, written the way you would write it for a friend — measurements, timings, and the things nobody bothers to tell you.',
+    note: 'The method, written the way you would write it down for a friend — measurements, timings, and the things nobody bothers to tell you.',
     image:
       'https://images.pexels.com/photos/28921200/pexels-photo-28921200.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
     id: 'science',
-    label: 'Illustrated Science Card',
+    label: 'The Science',
     fig: 'Fig. III',
     catalog: 'MGNL-001-SC',
-    note: 'What salt actually does to a lemon over eleven days — osmosis, fermentation, and the quiet chemistry of preservation.',
+    note: 'What salt actually does to a lemon over eleven days — osmosis, fermentation, and the quiet chemistry that turns decay into keeping.',
     image:
       'https://images.pexels.com/photos/28921194/pexels-photo-28921194.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
     id: 'history',
-    label: 'History & Geography Card',
+    label: 'The Geography',
     fig: 'Map IV',
     catalog: 'MGNL-001-HG',
-    note: 'A fold-out card tracing the ingredient across borders — where it came from, how it travelled, and what it meant to the people who carried it.',
+    note: 'A fold-out card tracing the ingredient across borders — where it came from, how it travelled, and what it meant to the people who carried it with them.',
     image:
       'https://images.pexels.com/photos/20067918/pexels-photo-20067918.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
     id: 'letter',
-    label: 'Personal Letter',
+    label: 'The Letter',
     fig: 'Letter V',
-    catalog: 'MGNL-001-PL',
+    catalog: 'MGNL-001-LT',
     note: 'A handwritten note from the studio — the memory or question that started the whole investigation, signed in ink.',
     image:
       'https://images.pexels.com/photos/51343/old-letters-old-letter-handwriting-51343.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -125,7 +125,7 @@ export const archiveIndex = [
 export const readingRoomArticle = {
   title: 'Why Salt Is the Oldest Story We Tell',
   excerpt:
-    'Before vinegar, before sugar, before refrigeration, there was salt. It preserved not just food but entire ways of life — the winter that would have been hungry, the journey that would have been impossible, the flavour that would have been forgotten. A short essay on the most ordinary and most extraordinary ingredient in every kitchen.',
+    'Before vinegar, before sugar, before refrigeration — there was salt. It preserved not just food but entire ways of life: the winter that would have been hungry, the journey that would have been impossible, the flavour that would have been forgotten. A short essay on the most ordinary and most extraordinary ingredient in every kitchen.',
   readTime: '6 min read',
   catalog: 'MGNL-ESS-001',
   date: 'March 2025',

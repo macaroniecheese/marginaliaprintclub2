@@ -37,7 +37,7 @@ export default function About() {
             The Studio
           </p>
           <h1 className="font-display font-light text-paper text-6xl md:text-8xl lg:text-9xl tracking-tight fade-up leading-[0.92]">
-            About
+            The person behind the margins.
           </h1>
         </div>
       </section>
@@ -50,7 +50,7 @@ export default function About() {
             <div className="pt-6">
               <CatalogLabel className="text-accent">The Story</CatalogLabel>
               <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-                Why I started annotating the margins.
+                It started with a jar I couldn't explain.
               </h2>
             </div>
           </div>
@@ -67,28 +67,27 @@ export default function About() {
               Ordinary. So ordinary it was invisible.
             </p>
             <p>
-              Then I moved away from home, and I started cooking the things I
-              grew up eating. I found the recipe for the pickle in my
-              grandmother's handwriting, copied it exactly, and waited. Eleven
-              days. And somewhere around day seven I opened the jar, smelled it,
-              and realised I had no idea what was actually happening in there.
-              Salt was doing something. The sun was doing something. Time was
-              doing something. I just didn't know what.
+              Then I moved away from home and started cooking the things I grew
+              up eating. I found the recipe in my grandmother's handwriting,
+              copied it exactly, and waited. Eleven days. Somewhere around day
+              seven I opened the jar, smelled it, and realised I had no idea what
+              was actually happening in there. Salt was doing something. The sun
+              was doing something. Time was doing something. I just didn't know
+              what.
             </p>
             <p>
               That one question — <em className="font-display italic text-ink">what is actually happening in the jar?</em> —
-              became a painting, then a science card, then a history, then a
-              letter to a friend. Then it became the question itself: what else
-              am I eating every day without understanding? What other ingredient
-              is sitting in the corner of the page, unexplained?
+              became a painting, then a science card, then a map, then a letter to
+              a friend. Then it became a bigger question: what else am I eating
+              every day without understanding? What other ingredient is sitting
+              in the corner of the page, unexplained?
             </p>
             <p>
               That's Marginalia. Each month, I take one ingredient — the kind
               that usually gets a single line in a recipe, if it gets mentioned
-              at all — and I give it the full treatment. I paint it. I research
-              its chemistry. I trace it across borders and centuries. I write
-              about it the way I'd write to a friend: here's what I found, here's
-              what surprised me, here's what I'm still wondering about.
+              at all — and I follow it wherever it goes. The chemistry. The
+              geography. The family it travelled through. The story it carries
+              that nobody tells you, because it's too obvious to mention.
             </p>
             <p>
               I'm a painter by training. I'm not a historian, not a food
@@ -115,7 +114,7 @@ export default function About() {
             <div className="pt-6">
               <CatalogLabel className="text-accent">The Practice</CatalogLabel>
               <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-                How each archive is made.
+                How each investigation works.
               </h2>
             </div>
           </div>
@@ -128,11 +127,13 @@ export default function About() {
                 something that deserves more attention than it usually gets.
               </p>
               <p className="text-ink-soft leading-relaxed max-w-2xl text-lg">
-                I paint it, research its history, write about it like a letter to
-                a friend, and send it all to you in an envelope. The seal and
-                the caret stay the same every month. The painting and the story
-                are the only things that change — so each archive feels like a
-                new page in the same book.
+                I paint it. I dig into the chemistry. I trace it across borders
+                and centuries. I write about it the way I'd write to a friend —
+                here's what I found, here's what surprised me, here's what I'm
+                still wondering about. Then I seal it all in an envelope and send
+                it to you. The mark on the front stays the same every month. The
+                story inside is the only thing that changes — so each archive
+                feels like the next page in the same book.
               </p>
             </div>
 

@@ -21,8 +21,9 @@ export default function Footer({ onNavigate }: Props) {
               <span className="tracking-tight">Marginalia</span>
             </button>
             <p className="font-mono text-xs text-paper/50 mt-4 leading-relaxed max-w-xs">
-              A monthly archive exploring one ingredient through art, recipes,
-              science, history, and personal letters.
+              A monthly investigation into the ordinary foods we never think
+              about — the science, the geography, the family, the story. Sent in
+              an envelope. Built to be collected.
             </p>
           </div>
 

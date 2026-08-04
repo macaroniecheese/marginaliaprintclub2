@@ -66,12 +66,13 @@ function Hero({ onNavigate }: { onNavigate: (page: string) => void }) {
             {archiveOne.number} — {archiveOne.title}
           </p>
           <h1 className="font-display font-light text-paper text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight fade-up max-w-5xl text-balance">
-            Every recipe tells a bigger story.
+            The ingredient you never think about has a story.
           </h1>
           <p className="font-display italic font-light text-paper/80 text-lg md:text-2xl mt-8 max-w-2xl leading-relaxed fade-up">
-            Each month, subscribers receive a new archive — one ingredient
-            explored through fine art, recipes, science, history, geography, and
-            a personal letter. Not a box of products. A way of looking.
+            Every month I open a new investigation — one ordinary food, pulled
+            from the corner of the page and given the full attention it quietly
+            deserves. Science, migration, family, geography, and a letter from
+            the studio. Sent in an envelope. Built to be collected.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-12 fade-up">
             <button
@@ -84,11 +85,11 @@ function Hero({ onNavigate }: { onNavigate: (page: string) => void }) {
               onClick={() => onNavigate('archive')}
               className="px-10 py-4 border border-paper/30 text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-paper/10 transition-colors duration-500 tactile"
             >
-              Explore Archive No. 001
+              Start with No. 001
             </button>
           </div>
           <p className="font-mono text-[11px] text-paper/40 mt-8 tracking-[0.1em] uppercase">
-            No. 002 — Mustard Seeds — arrives this spring
+            No. 002 — Mustard Seeds — in progress now
           </p>
         </div>
       </div>
@@ -114,8 +115,8 @@ function WhatsInside() {
           <div className="pt-6">
             <CatalogLabel className="text-accent">Contents of the Envelope</CatalogLabel>
             <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-              Open the envelope.<br />
-              <span className="italic text-ink-soft">Five pieces, one ingredient.</span>
+              What arrives in the envelope.<br />
+              <span className="italic text-ink-soft">Five pieces. One ingredient. One story.</span>
             </h2>
           </div>
         </div>
@@ -218,7 +219,8 @@ function WhatsInside() {
 
         <p className="font-mono text-xs text-ink-faint mt-10 max-w-md leading-relaxed">
           Each piece is printed on archival paper, annotated by hand, and sealed
-          with the Marginalia mark. The envelope is part of the object.
+          with the Marginalia mark. The envelope itself is part of the object —
+          the first thing you open, and the last thing you keep.
         </p>
       </div>
     </section>
@@ -239,7 +241,7 @@ function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) 
           <div className="pt-6">
             <CatalogLabel className="text-accent">The Current Archive</CatalogLabel>
             <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight">
-              Archive No. 001
+              The first investigation.
             </h2>
           </div>
         </div>
@@ -282,14 +284,14 @@ function ArchiveFeature({ onNavigate }: { onNavigate: (page: string) => void }) 
                 onClick={() => onNavigate('archive')}
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-500 group tactile"
               >
-                Subscribe — No. 001
+                Join the Archive
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" />
               </button>
               <button
                 onClick={() => onNavigate('archive')}
                 className="px-8 py-3.5 border border-rule font-mono text-xs tracking-[0.16em] uppercase text-ink-soft hover:border-ink hover:text-ink transition-colors duration-500 tactile"
               >
-                Read the Full Archive
+                See What's Inside
               </button>
             </div>
           </div>
@@ -313,7 +315,7 @@ function ArchiveIndexSection() {
           <div className="pt-6">
             <CatalogLabel className="text-accent">The Archive Index</CatalogLabel>
             <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-              Where the investigation goes next.
+              Where the curiosity goes next.
             </h2>
           </div>
         </div>
@@ -329,8 +331,8 @@ function ArchiveIndexSection() {
 
         <p className="font-mono text-xs text-ink-faint mt-16 max-w-lg leading-relaxed">
           The index grows by one each month. Future investigations are teased,
-          not stocked — each ingredient earns its place when the painting and
-          the research are done.
+          not stocked — each ingredient earns its place when the research is
+          done and the painting is dry.
         </p>
       </div>
     </section>
@@ -414,7 +416,7 @@ function WhyMarginalia() {
           <div className="pt-6">
             <CatalogLabel className="text-accent">Editor's Note</CatalogLabel>
             <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-              Why Marginalia exists.
+              How this started.
             </h2>
           </div>
         </div>
@@ -432,25 +434,26 @@ function WhyMarginalia() {
               invisible.
             </p>
             <p>
-              Years later, standing in my own kitchen a thousand miles from hers,
-              I started wondering about that jar. Not the recipe — I had that.
-              The question was <em className="font-display italic text-ink">why</em>. Why salt? Why the sun? Why
-              eleven days and not ten? Why does every culture that grows lemons
-              have some version of this exact thing, and why did they all arrive
-              at it on their own?
+              Years later, a thousand miles from her kitchen, I started
+              wondering about that jar. Not the recipe — I had that. The question
+              was <em className="font-display italic text-ink">why</em>. Why salt? Why the sun? Why eleven days
+              and not ten? Why does every culture that grows lemons have some
+              version of this exact thing — and why did they all arrive at it
+              on their own?
             </p>
             <p>
-              One question became five. Five became a painting, a science card, a
-              history, a letter. That's the whole project. Marginalia is what
+              One question became five. Five became a painting, a science card,
+              a map, a letter. That's the whole project. Marginalia is what
               happens when you take the ingredient in the corner of the page —
               the one the recipe doesn't bother to explain — and give it the
               attention it quietly deserves.
             </p>
             <p>
               I'm not a historian or a scientist. I'm a painter who got curious
-              and couldn't stop. Each archive is me going down the research hole
-              and sending you what I find — the art, the method, the chemistry,
-              the geography, and the memory — sealed in an envelope, once a month.
+              and couldn't stop. Each archive is me going down the research
+              hole and sending you what I find — the painting, the method, the
+              chemistry, the geography, the memory — sealed in an envelope,
+              once a month.
             </p>
           </div>
 
@@ -481,6 +484,10 @@ function ReadingRoom() {
             <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
               A short piece, for the table.
             </h2>
+            <p className="font-display italic text-lg text-ink-light mt-4 max-w-xl">
+              Essays that sit alongside the archives — not required reading,
+              just things I couldn't stop thinking about.
+            </p>
           </div>
         </div>
 
@@ -537,7 +544,7 @@ function Sketchbook() {
           <div className="pt-6">
             <CatalogLabel className="text-accent">From the Sketchbook</CatalogLabel>
             <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-              Works in progress, before they become an archive.
+              Before it becomes an archive.
             </h2>
           </div>
         </div>
@@ -567,9 +574,9 @@ function Sketchbook() {
         </div>
 
         <p className="font-mono text-xs text-ink-faint mt-14 max-w-md leading-relaxed">
-          The sketchbook is where the archive takes shape — first drawings,
-          recipe tests, colour studies, and science illustrations before
-          they're ready for the envelope.
+          The sketchbook is where every investigation begins — first drawings,
+          recipe tests, colour studies, and science illustrations. Not finished
+          work. The messy part before the envelope.
         </p>
       </div>
     </section>
@@ -588,12 +595,13 @@ function MarginNotes() {
         </div>
         <CatalogLabel className="text-accent">Margin Notes</CatalogLabel>
         <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 mb-8 leading-[0.95] tracking-tight text-balance">
-          Occasional sketches, discoveries, and previews from upcoming archives.
+          Postcards from the studio.
         </h2>
         <p className="text-ink-soft leading-relaxed mb-12 max-w-lg mx-auto text-lg">
           Not a newsletter in the usual sense. More like a postcard from the
-          studio — a drawing, a finding, or a look at what's coming next. Sent
-          now and then, when there's something worth sending.
+          studio — a sketch, a discovery, a question I'm sitting with, or a
+          preview of what's coming next. Sent now and then, when there's
+          something worth sending.
         </p>
         <form
           onSubmit={(e) => e.preventDefault()}

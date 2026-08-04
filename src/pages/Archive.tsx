@@ -39,14 +39,15 @@ export default function Archive({ onNavigate }: Props) {
 
         <div className="relative z-10 px-6 pb-16 md:pb-20 max-w-8xl mx-auto w-full">
           <p className="font-mono text-xs tracking-[0.2em] uppercase text-paper/70 mb-4 fade-in">
-            Subscribe to the Archive
+            Join the Archive
           </p>
           <h1 className="font-display font-light text-paper text-5xl md:text-7xl lg:text-8xl tracking-tight fade-up leading-[0.92] text-balance">
-            Become an Archivist.
+            One ingredient a month.
           </h1>
           <p className="font-display italic font-light text-paper/80 text-lg md:text-2xl mt-6 max-w-2xl fade-up">
-            One envelope each month. One ingredient, five pieces, and a story
-            that starts in the margin.
+            Not a product. Not a box. An investigation that arrives in an
+            envelope — and builds, month by month, into something worth keeping
+            on the shelf.
           </p>
         </div>
       </section>
@@ -59,7 +60,7 @@ export default function Archive({ onNavigate }: Props) {
             <div className="pt-6">
               <CatalogLabel className="text-accent">The Subscription</CatalogLabel>
               <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-                One way to receive. One envelope. Everything in it.
+                One way to join. One envelope. Everything inside.
               </h2>
             </div>
           </div>
@@ -71,7 +72,7 @@ export default function Archive({ onNavigate }: Props) {
             <div className="text-center mb-10">
               <h3 className="font-display italic font-light text-4xl text-ink mb-2">Archivist</h3>
               <p className="font-mono text-xs tracking-[0.16em] uppercase text-ink-light">
-                The Full Archive · Monthly
+                The Full Investigation · Monthly
               </p>
             </div>
 
@@ -92,18 +93,18 @@ export default function Archive({ onNavigate }: Props) {
               ))}
               <li className="flex gap-3 text-ink-soft">
                 <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-ink">Bonus print on your birthday</span>
+                <span className="text-ink">A bonus investigation on your birthday</span>
               </li>
               <li className="flex gap-3 text-ink-soft">
                 <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-ink">Early access to originals & commissions</span>
+                <span className="text-ink">Early access to originals and commissions</span>
               </li>
             </ul>
 
             <SubscribeButton />
 
             <p className="font-mono text-[11px] text-ink-faint mt-6 text-center tracking-[0.06em]">
-              Your first envelope — Archive No. 001, Lemon Pickle — ships within the week.
+              Your first envelope — No. 001, Lemon Pickle — arrives within the week.
             </p>
           </div>
         </div>
@@ -117,7 +118,7 @@ export default function Archive({ onNavigate }: Props) {
             <div className="pt-6">
               <CatalogLabel className="text-accent">How It Arrives</CatalogLabel>
               <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-                How the archive arrives.
+                How it arrives.
               </h2>
             </div>
           </div>
@@ -126,18 +127,18 @@ export default function Archive({ onNavigate }: Props) {
             {[
               {
                 num: '01',
-                title: 'Subscribe',
-                body: 'Join as an Archivist. Your first envelope — the current archive — ships within the week.',
+                title: 'Join',
+                body: 'Become an Archivist. Your first envelope — the current investigation — arrives within the week.',
               },
               {
                 num: '02',
-                title: 'Receive',
-                body: 'A sealed envelope arrives each month: painting, recipe, science card, history card, and a letter.',
+                title: 'Open',
+                body: 'A sealed envelope arrives each month: painting, recipe, science card, geography card, and a letter from the studio.',
               },
               {
                 num: '03',
                 title: 'Collect',
-                body: 'The archive grows by one each month. Each issue is designed to sit beside the last — same size, same seal, new story.',
+                body: 'The archive grows by one each month. Each issue is designed to sit beside the last — same size, same mark, new story.',
               },
             ].map((step) => (
               <div key={step.num} className="border-t border-rule pt-6">
@@ -160,6 +161,11 @@ export default function Archive({ onNavigate }: Props) {
               <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
                 Five investigations, planned and in progress.
               </h2>
+              <p className="font-display italic text-lg text-ink-light mt-4 max-w-xl">
+                Some are finished and ready to send. Others are still on the
+                desk — being painted, tested, researched. The index grows by one
+                each month.
+              </p>
             </div>
           </div>
 
@@ -180,13 +186,14 @@ export default function Archive({ onNavigate }: Props) {
           <div className="flex justify-center mb-10">
             <Seal size={64} color="#FAFAF7" sprigColor="#A9812E" veinColor="#1A1A1A" />
           </div>
-          <CatalogLabel className="text-paper/50">Subscribe</CatalogLabel>
+          <CatalogLabel className="text-paper/50">Join</CatalogLabel>
           <h2 className="font-display font-light text-4xl md:text-6xl text-paper mt-3 mb-8 leading-[0.95] tracking-tight text-balance">
-            The archive begins with a jar.
+            The whole thing starts with a jar.
           </h2>
           <p className="text-paper/60 mb-12 text-lg max-w-lg mx-auto">
-            Subscribe before Archive No. 002 arrives, and your collection
-            starts at the beginning.
+            Join before No. 002 arrives, and your collection starts at the
+            very beginning — with a jar of lemon pickle and the question I
+            couldn't stop asking.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <SubscribeButton dark />

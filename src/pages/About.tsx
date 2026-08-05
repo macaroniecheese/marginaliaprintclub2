@@ -1,168 +1,141 @@
-import Seal from '@/components/Seal';
-import {
-  RegistrationMark,
-  CatalogLabel,
-  DateStamp,
-  MarginNote,
-  CornerMarks,
-  SectionNumber,
-} from '@/components/ArchivalMarks';
-import { aboutPortrait, archiveOne } from '@/data';
+import { useState } from 'react';
+import { Plus, Minus } from 'lucide-react';
+import { CatalogLabel, SectionNumber } from '@/components/ArchivalMarks';
+
+const faqs = [
+  {
+    q: 'What exactly arrives in the mail?',
+    a: 'An envelope with five pieces inside: an original 4x6 art print, a recipe card, a set of field notes (the science and the geography), a handwritten letter from the studio, and a surprise enclosure that changes every month — sometimes a playlist, sometimes a seed packet, sometimes something else entirely.',
+  },
+  {
+    q: 'How often does a new archive arrive?',
+    a: 'Once a month. Each investigation takes roughly four weeks — painting, researching, testing, writing — and then it gets sealed and sent. The archive grows by one each month.',
+  },
+  {
+    q: 'Do I need to start from No. 001?',
+    a: 'You can start whenever you like. Each archive stands on its own — it is one ingredient, one story, one envelope. But if you begin at No. 001, your collection grows in order, and the shelf starts to tell a story of its own.',
+  },
+  {
+    q: 'Can I cancel anytime?',
+    a: 'Yes. There is no lock-in. You can pause or cancel your subscription at any time, no questions asked. You keep everything that has already arrived.',
+  },
+  {
+    q: 'Is this a food magazine or an art project?',
+    a: 'It is neither and both. I am a painter who got curious about food and could not stop researching. Each archive is part artwork, part recipe, part field note — the way a curious friend might share what they found, if that friend also painted and had very strong feelings about paper.',
+  },
+  {
+    q: 'Where do you ship?',
+    a: 'Currently anywhere in the world. The envelope is flat and light, so it travels easily. If your postal service can deliver a letter, it can deliver Marginalia.',
+  },
+  {
+    q: 'What if I already know a lot about food?',
+    a: 'Even better. The archives are not beginner guides — they are investigations, written for people who like to go deep. If you already know the recipe, the field notes and the letter are where the surprises tend to live.',
+  },
+];
 
 export default function About() {
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative h-[60vh] flex items-end overflow-hidden">
-        <img
-          src={aboutPortrait}
-          alt="The studio"
-          className="absolute inset-0 w-full h-full object-cover scale-in"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-ink/30" />
-
-        {/* Top metadata bar */}
-        <div className="absolute top-0 left-0 right-0 z-10 px-6 pt-24 pb-4">
-          <div className="max-w-8xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <RegistrationMark size={12} color="rgba(250,250,247,0.5)" />
-              <CatalogLabel className="text-paper/60">MGNL-ABT · The Studio</CatalogLabel>
-            </div>
-            <DateStamp className="text-paper/60">Est. 2024</DateStamp>
-          </div>
-        </div>
-
-        <div className="relative z-10 px-6 pb-16 md:pb-20 max-w-8xl mx-auto w-full">
-          <p className="font-mono text-xs tracking-[0.2em] uppercase text-paper/70 mb-4 fade-in">
-            The Studio
-          </p>
-          <h1 className="font-display font-light text-paper text-6xl md:text-8xl lg:text-9xl tracking-tight fade-up leading-[0.92]">
-            The person behind the margins.
-          </h1>
-        </div>
-      </section>
-
-      {/* Personal story */}
-      <section className="py-32 md:py-40 px-6 rule-bottom">
+    <div className="pt-32">
+      {/* Editor's note */}
+      <section className="py-24 md:py-32 px-6">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-start gap-8 mb-16">
             <SectionNumber num="01" className="flex-shrink-0 -ml-2" />
             <div className="pt-6">
-              <CatalogLabel className="text-accent">The Story</CatalogLabel>
-              <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-                It started with a jar I couldn't explain.
-              </h2>
+              <CatalogLabel className="text-accent">Editor's Note</CatalogLabel>
             </div>
           </div>
 
           <div className="space-y-6 text-lg text-ink-soft leading-relaxed">
             <p>
-              I didn't set out to start a publication. I set out to answer a
-              question about a jar of pickle.
+              I started Marginalia because of a jar of pickle I could not
+              explain. My grandmother kept one on the top shelf of her kitchen,
+              where the afternoon sun hit it every day. I never thought about it
+              — it was just there, the way salt is there, the way the gas burner
+              is there. Ordinary. So ordinary it was invisible.
             </p>
             <p>
-              My grandmother kept one on the top shelf of her kitchen, where the
-              afternoon sun landed. As a child I never thought about it — it was
-              just there, the way salt is there, the way the gas burner is there.
-              Ordinary. So ordinary it was invisible.
-            </p>
-            <p>
-              Then I moved away from home and started cooking the things I grew
-              up eating. I found the recipe in my grandmother's handwriting,
-              copied it exactly, and waited. Eleven days. Somewhere around day
-              seven I opened the jar, smelled it, and realised I had no idea what
-              was actually happening in there. Salt was doing something. The sun
-              was doing something. Time was doing something. I just didn't know
+              Years later, a thousand miles from her kitchen, I started cooking
+              the things I grew up eating. I found her recipe, copied it
+              exactly, and waited eleven days. Somewhere around day seven I
+              opened the jar, smelled it, and realised I had no idea what was
+              actually happening in there. Salt was doing something. The sun was
+              doing something. Time was doing something. I just did not know
               what.
             </p>
             <p>
-              That one question — <em className="font-display italic text-ink">what is actually happening in the jar?</em> —
-              became a painting, then a science card, then a map, then a letter to
-              a friend. Then it became a bigger question: what else am I eating
-              every day without understanding? What other ingredient is sitting
-              in the corner of the page, unexplained?
+              That one question became a painting, then a science card, then a
+              map, then a letter. Then it became a bigger question: what else am
+              I eating every day without understanding? What other ingredient is
+              sitting in the corner of the page, unexplained?
             </p>
             <p>
-              That's Marginalia. Each month, I take one ingredient — the kind
-              that usually gets a single line in a recipe, if it gets mentioned
-              at all — and I follow it wherever it goes. The chemistry. The
-              geography. The family it travelled through. The story it carries
-              that nobody tells you, because it's too obvious to mention.
+              That is Marginalia. Each month I take one ingredient, technique,
+              or dish — the kind that usually gets a single line in a recipe, if
+              it gets mentioned at all — and I follow it wherever it goes. The
+              chemistry. The geography. The family it travelled through. The
+              story it carries that nobody tells you, because it is too obvious
+              to mention.
             </p>
             <p>
-              I'm a painter by training. I'm not a historian, not a food
-              scientist, not a chef. I'm someone who got curious and couldn't
-              stop, and I think that's the right way to do this — because the
-              ingredient in the corner of the page deserves the attention of
-              someone who genuinely wants to know, not someone who already does.
+              I am a painter by training. Not a historian, not a food scientist,
+              not a chef. Someone who got curious and could not stop — and I
+              think that is the right way to do this. The ingredient in the
+              corner of the page deserves the attention of someone who genuinely
+              wants to know, not someone who already does.
             </p>
-          </div>
-
-          <div className="mt-12 pl-6 border-l-2 border-accent/30">
-            <MarginNote className="text-2xl">
-              from my kitchen to yours —
-            </MarginNote>
           </div>
         </div>
       </section>
 
-      {/* The practice */}
-      <section className="py-32 md:py-40 px-6 bg-paper-warm">
-        <div className="max-w-8xl mx-auto">
+      {/* FAQ */}
+      <section className="py-24 md:py-32 px-6 bg-paper-warm">
+        <div className="max-w-3xl mx-auto">
           <div className="flex items-start gap-8 mb-16">
             <SectionNumber num="02" className="flex-shrink-0 -ml-2" />
             <div className="pt-6">
-              <CatalogLabel className="text-accent">The Practice</CatalogLabel>
-              <h2 className="font-display font-light text-4xl md:text-6xl text-ink mt-3 leading-[0.95] tracking-tight text-balance">
-                How each investigation works.
-              </h2>
+              <CatalogLabel className="text-accent">FAQ</CatalogLabel>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-[1fr_280px] gap-12 md:gap-20">
-            <div>
-              <p className="font-display italic text-xl md:text-2xl text-ink-soft leading-relaxed mb-8 max-w-2xl">
-                Each archive starts with an ingredient I can't stop thinking
-                about — something small, something from the corner of a recipe,
-                something that deserves more attention than it usually gets.
-              </p>
-              <p className="text-ink-soft leading-relaxed max-w-2xl text-lg">
-                I paint it. I dig into the chemistry. I trace it across borders
-                and centuries. I write about it the way I'd write to a friend —
-                here's what I found, here's what surprised me, here's what I'm
-                still wondering about. Then I seal it all in an envelope and send
-                it to you. The mark on the front stays the same every month. The
-                story inside is the only thing that changes — so each archive
-                feels like the next page in the same book.
-              </p>
-            </div>
-
-            {/* Archive rail */}
-            <div className="md:border-l md:border-rule md:pl-10">
-              <CatalogLabel className="text-accent mb-4 block">Upcoming</CatalogLabel>
-              <div className="space-y-5">
-                {[
-                  { num: '001', title: 'Lemon Pickle', date: 'Spring 2025' },
-                  { num: '002', title: 'Mustard Seeds', date: 'Spring 2025' },
-                  { num: '003', title: 'Tamarind', date: 'Summer 2025' },
-                  { num: '004', title: 'Khichdi', date: 'Monsoon 2025' },
-                  { num: '005', title: 'Curry Leaves', date: 'Autumn 2025' },
-                ].map((item) => (
-                  <div key={item.num} className="flex items-baseline gap-3">
-                    <span className="font-mono text-xs text-accent tracking-[0.1em] w-8">
-                      {item.num}
-                    </span>
-                    <div>
-                      <p className="font-display text-ink">{item.title}</p>
-                      <DateStamp>{item.date}</DateStamp>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="space-y-2">
+            {faqs.map((item, i) => (
+              <FaqItem key={i} q={item.q} a={item.a} />
+            ))}
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="border-b border-rule">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between gap-4 py-5 text-left group"
+      >
+        <span className="font-display text-lg md:text-xl text-ink group-hover:text-accent transition-colors duration-300">
+          {q}
+        </span>
+        <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center text-ink-soft">
+          {open ? (
+            <Minus className="w-4 h-4" />
+          ) : (
+            <Plus className="w-4 h-4" />
+          )}
+        </span>
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <p className="pb-6 text-ink-soft leading-relaxed pr-12">{a}</p>
+      </div>
     </div>
   );
 }

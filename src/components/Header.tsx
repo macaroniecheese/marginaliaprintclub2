@@ -29,7 +29,7 @@ export default function Header({ onNavigate, current }: Props) {
     setMenuOpen(false);
   };
 
-  const onHero = !scrolled;
+  const onHero = !scrolled && current === 'home';
   const textColor = onHero ? 'text-paper' : 'text-ink';
   const subText = onHero ? 'text-paper/70' : 'text-ink-light';
   const hoverColor = onHero ? 'hover:text-paper' : 'hover:text-accent';

@@ -66,58 +66,47 @@ export const envelopeContents = [
 export const archiveIndex = [
   {
     number: '001',
-    title: 'Lemon Pickle',
+    title: 'Pickling',
     status: 'available',
     catalog: 'MGNL-001',
     accent: '#9C3427',
     date: 'Spring 2025',
     image:
       'https://images.pexels.com/photos/35267279/pexels-photo-35267279.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    note: 'sun-brined · south asia',
+    note: 'Technique | Subcontinent',
   },
   {
     number: '002',
-    title: 'Mustard Seeds',
+    title: 'Tempering',
     status: 'coming-soon',
     catalog: 'MGNL-002',
     accent: '#A9812E',
     date: 'Spring 2025',
     image:
       'https://images.pexels.com/photos/18346906/pexels-photo-18346906.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    note: 'tempered · bengal',
+    note: 'Technique | Subcontinent',
   },
   {
     number: '003',
-    title: 'Tamarind',
+    title: 'Asafoetida',
     status: 'coming-soon',
     catalog: 'MGNL-003',
     accent: '#6B4226',
     date: 'Summer 2025',
     image:
       'https://images.pexels.com/photos/20737581/pexels-photo-20737581.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    note: 'souring agent · tropical belt',
+    note: 'Technique | Subcontinent',
   },
   {
     number: '004',
-    title: 'Khichdi',
+    title: 'Smoking (dhungar)',
     status: 'coming-soon',
     catalog: 'MGNL-004',
     accent: '#4A5A34',
     date: 'Monsoon 2025',
     image:
       'https://images.pexels.com/photos/6363498/pexels-photo-6363498.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    note: 'rice & lentils · subcontinent',
-  },
-  {
-    number: '005',
-    title: 'Curry Leaves',
-    status: 'coming-soon',
-    catalog: 'MGNL-005',
-    accent: '#2E4057',
-    date: 'Autumn 2025',
-    image:
-      'https://images.pexels.com/photos/1334149/pexels-photo-1334149.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    note: 'tempering · western ghats',
+    note: 'Technique | Subcontinent',
   },
 ];
 

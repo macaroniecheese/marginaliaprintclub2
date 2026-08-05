@@ -1,6 +1,6 @@
 import { Instagram } from 'lucide-react';
 import Caret from '@/components/Caret';
-import { RegistrationMark, CatalogLabel } from '@/components/ArchivalMarks';
+import { CatalogLabel } from '@/components/ArchivalMarks';
 
 type Props = {
   onNavigate: (page: string) => void;
@@ -20,11 +20,6 @@ export default function Footer({ onNavigate }: Props) {
               <Caret width={16} height={24} color="#9C3427" />
               <span className="tracking-tight">Marginalia</span>
             </button>
-            <p className="font-mono text-xs text-paper/50 mt-4 leading-relaxed max-w-xs">
-              A monthly investigation into the ordinary foods we never think
-              about — the science, the geography, the family, the story. Sent in
-              an envelope. Built to be collected.
-            </p>
           </div>
 
           {/* Nav */}
@@ -66,12 +61,8 @@ export default function Footer({ onNavigate }: Props) {
 
         {/* Bottom bar */}
         <div className="mt-16 pt-6 border-t border-paper/10 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <RegistrationMark size={10} color="rgba(250,250,247,0.3)" />
-            <CatalogLabel className="text-paper/40">MGNL · Est. 2024</CatalogLabel>
-          </div>
           <p className="font-mono text-[10px] text-paper/30 tracking-[0.06em]">
-            notes from the edge of the recipe · © {new Date().getFullYear()} Marginalia
+            © {new Date().getFullYear()} Marginalia
           </p>
         </div>
       </div>

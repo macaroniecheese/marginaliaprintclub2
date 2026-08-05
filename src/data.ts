@@ -17,48 +17,48 @@ export const archiveOne = {
 export const envelopeContents = [
   {
     id: 'print',
-    label: 'The Painting',
+    label: 'Art Print',
     fig: 'Plate I',
     catalog: 'MGNL-001-PL',
     note: 'An oil-painted portrait of the ingredient — the first thing made for every archive, and the thing the rest of the investigation orbits around.',
     image:
-      'https://images.pexels.com/photos/32369411/pexels-photo-32369411.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+      'https://images.pexels.com/photos/32369411/pexels-photo-32369411.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
   },
   {
     id: 'recipe',
-    label: 'The Recipe',
+    label: 'Recipe',
     fig: 'Card II',
     catalog: 'MGNL-001-RC',
     note: 'The method, written the way you would write it down for a friend — measurements, timings, and the things nobody bothers to tell you.',
     image:
-      'https://images.pexels.com/photos/28921200/pexels-photo-28921200.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+      'https://images.pexels.com/photos/28921200/pexels-photo-28921200.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
   },
   {
-    id: 'science',
-    label: 'The Science',
+    id: 'fieldnotes',
+    label: 'Field Notes',
     fig: 'Fig. III',
-    catalog: 'MGNL-001-SC',
-    note: 'What salt actually does to a lemon over eleven days — osmosis, fermentation, and the quiet chemistry that turns decay into keeping.',
+    catalog: 'MGNL-001-FN',
+    note: 'The science and the geography — what salt actually does over eleven days, where the ingredient travelled from, and what it meant to the people who carried it.',
     image:
-      'https://images.pexels.com/photos/28921194/pexels-photo-28921194.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  },
-  {
-    id: 'history',
-    label: 'The Geography',
-    fig: 'Map IV',
-    catalog: 'MGNL-001-HG',
-    note: 'A fold-out card tracing the ingredient across borders — where it came from, how it travelled, and what it meant to the people who carried it with them.',
-    image:
-      'https://images.pexels.com/photos/20067918/pexels-photo-20067918.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+      'https://images.pexels.com/photos/20067918/pexels-photo-20067918.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
   },
   {
     id: 'letter',
-    label: 'The Letter',
-    fig: 'Letter V',
+    label: 'Handwritten Letter',
+    fig: 'Letter IV',
     catalog: 'MGNL-001-LT',
     note: 'A handwritten note from the studio — the memory or question that started the whole investigation, signed in ink.',
     image:
-      'https://images.pexels.com/photos/51343/old-letters-old-letter-handwriting-51343.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+      'https://images.pexels.com/photos/51343/old-letters-old-letter-handwriting-51343.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
+  },
+  {
+    id: 'surprise',
+    label: 'Surprise',
+    fig: 'Enclosure V',
+    catalog: 'MGNL-001-SP',
+    note: 'Something different every month — a playlist, a seed packet, a folded map, a small object that belongs to the story but won\u2019t be announced in advance.',
+    image:
+      'https://images.pexels.com/photos/28921194/pexels-photo-28921194.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
   },
 ];
 

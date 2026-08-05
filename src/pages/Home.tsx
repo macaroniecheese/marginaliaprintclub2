@@ -39,7 +39,7 @@ function Hero({
   return (
     <section className="relative min-h-screen flex items-end overflow-hidden">
       <img
-        src="/home/project/public/turmeric_infographic.webp"
+        src="https://images.pexels.com/photos/7494618/pexels-photo-7494618.jpeg?auto=compress&cs=tinysrgb&h=1200&w=900"
         alt="Oil painting study of lemons with art supplies"
         className="absolute inset-0 w-full h-full object-cover scale-in"
       />

@@ -37,26 +37,14 @@ function Hero({
   onSeeInside: () => void;
 }) {
   return (
-    <section className="relative min-h-screen flex items-end overflow-hidden">
-      <div
-        className="absolute inset-0 scale-in"
-        style={{
-          backgroundImage: 'url(/hero-image.webp)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-        }}
-        role="img"
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-ink/30" />
-
-      <div className="relative z-10 w-full px-6 pb-16 md:pb-24">
-        <div className="max-w-8xl mx-auto">
-          <h1 className="font-display font-light text-paper text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight fade-up max-w-5xl text-balance">
+    <section className="min-h-screen flex flex-col md:flex-row">
+      {/* Left — cream text panel */}
+      <div className="flex flex-col justify-center px-8 md:px-16 lg:px-24 py-32 md:py-0 bg-paper w-full md:w-[48%] lg:w-[44%] flex-shrink-0">
+        <div className="max-w-lg">
+          <h1 className="font-display font-light text-ink text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.92] tracking-tight fade-up text-balance">
             Nothing we eat exists in isolation.
           </h1>
-          <p className="font-display italic font-light text-paper/80 text-lg md:text-2xl mt-8 max-w-2xl leading-relaxed fade-up">
+          <p className="font-display italic font-light text-ink-soft text-base md:text-lg lg:text-xl mt-8 leading-relaxed fade-up">
             Each month, Marginalia follows one ingredient, technique, or dish
             through an illustrated archive, part recipe, part artwork, part
             field note.
@@ -64,18 +52,33 @@ function Hero({
           <div className="flex flex-col sm:flex-row gap-4 mt-12 fade-up">
             <button
               onClick={() => onNavigate('archive')}
-              className="px-10 py-4 bg-paper text-ink font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent hover:text-paper transition-colors duration-500 tactile"
+              className="px-10 py-4 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-500 tactile"
             >
               Become an Archivist
             </button>
             <button
               onClick={onSeeInside}
-              className="px-10 py-4 border border-paper/30 text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-paper/10 transition-colors duration-500 tactile"
+              className="px-10 py-4 border border-rule text-ink font-mono text-xs tracking-[0.16em] uppercase hover:bg-ink/5 transition-colors duration-500 tactile"
             >
               See what's inside
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Right — full-bleed image */}
+      <div className="relative flex-1 min-h-[55vw] md:min-h-0 overflow-hidden bg-[#F5F3EE]">
+        <div
+          className="absolute inset-0 scale-in"
+          style={{
+            backgroundImage: "url('/hero-image copy.webp')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+          }}
+          role="img"
+          aria-hidden="true"
+        />
       </div>
     </section>
   );

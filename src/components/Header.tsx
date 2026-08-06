@@ -30,17 +30,18 @@ export default function Header({ onNavigate, current }: Props) {
   };
 
   const onHero = !scrolled && current === 'home';
-  const textColor = onHero ? 'text-paper' : 'text-ink';
-  const subText = onHero ? 'text-paper/70' : 'text-ink-light';
-  const hoverColor = onHero ? 'hover:text-paper' : 'hover:text-accent';
-  const activeColor = onHero ? 'text-paper' : 'text-accent';
+  // Hero is now split with a cream left panel — use ink text at all times on home
+  const textColor = 'text-ink';
+  const subText = onHero ? 'text-ink-light' : 'text-ink-light';
+  const hoverColor = 'hover:text-accent';
+  const activeColor = 'text-accent';
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? 'bg-paper/95 backdrop-blur-md border-b border-rule py-3'
-          : 'bg-transparent py-5'
+          : 'bg-paper/80 backdrop-blur-sm py-5'
       }`}
     >
       <div className="max-w-8xl mx-auto px-6 flex items-center justify-between">
@@ -53,7 +54,7 @@ export default function Header({ onNavigate, current }: Props) {
           <Caret
             width={16}
             height={24}
-            color={onHero ? '#FAFAF7' : '#9C3427'}
+            color="#9C3427"
           />
           <span className="tracking-tight">Marginalia</span>
         </button>

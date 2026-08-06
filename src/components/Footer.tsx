@@ -1,4 +1,4 @@
-import { Instagram } from 'lucide-react';
+import { Instagram, Music2 } from 'lucide-react';
 import Caret from '@/components/Caret';
 import { CatalogLabel } from '@/components/ArchivalMarks';
 
@@ -55,6 +55,13 @@ export default function Footer({ onNavigate }: Props) {
             >
               <Instagram className="w-4 h-4" />
               Instagram
+            </a>
+            <a
+              href="#"
+              className="flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-paper/70 hover:text-accent transition-colors"
+            >
+              <Music2 className="w-4 h-4" />
+              TikTok
             </a>
           </div>
         </div>

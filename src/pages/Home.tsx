@@ -39,17 +39,14 @@ function Hero({
   return (
     <section className="relative min-h-screen flex items-end overflow-hidden">
       <img
-        src="https://images.pexels.com/photos/7494618/pexels-photo-7494618.jpeg?auto=compress&cs=tinysrgb&h=1200&w=900"
-        alt="Oil painting study of lemons with art supplies"
-        className="absolute inset-0 w-full h-full object-cover scale-in"
+        src="/hero-image.webp"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover object-center scale-in"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-ink/30" />
 
       <div className="relative z-10 w-full px-6 pb-16 md:pb-24">
         <div className="max-w-8xl mx-auto">
-          <p className="font-mono text-xs tracking-[0.2em] uppercase text-paper/70 mb-6 fade-in">
-            No. 001 — Pickling
-          </p>
           <h1 className="font-display font-light text-paper text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight fade-up max-w-5xl text-balance">
             Nothing we eat exists in isolation.
           </h1>
@@ -98,7 +95,7 @@ function ContentsAccordion({
       <div className="max-w-8xl mx-auto">
         <div className="mb-20">
           <h2 className="font-display font-light text-4xl md:text-6xl text-ink leading-[0.95] tracking-tight text-balance">
-            Five pieces. One ingredient.
+            contents of the envelope
           </h2>
         </div>
 
@@ -143,7 +140,7 @@ function ContentsAccordion({
                     isActive ? 'opacity-0' : 'opacity-100'
                   }`}
                 >
-                  <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-paper/70 [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
+                  <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-paper [writing-mode:vertical-rl] rotate-180 whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
                     {item.label}
                   </span>
                 </div>

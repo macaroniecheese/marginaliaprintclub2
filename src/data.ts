@@ -21,8 +21,7 @@ export const envelopeContents = [
     fig: 'Plate I',
     catalog: 'MGNL-001-PL',
     note: 'An oil-painted portrait of the ingredient — the first thing made for every archive, and the thing the rest of the investigation orbits around.',
-    image:
-      'https://images.pexels.com/photos/32369411/pexels-photo-32369411.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
+    image: '/accordion-1.webp',
   },
   {
     id: 'recipe',
@@ -30,8 +29,7 @@ export const envelopeContents = [
     fig: 'Card II',
     catalog: 'MGNL-001-RC',
     note: 'The method, written the way you would write it down for a friend — measurements, timings, and the things nobody bothers to tell you.',
-    image:
-      'https://images.pexels.com/photos/28921200/pexels-photo-28921200.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
+    image: '/accordion-2.webp',
   },
   {
     id: 'fieldnotes',
@@ -39,8 +37,7 @@ export const envelopeContents = [
     fig: 'Fig. III',
     catalog: 'MGNL-001-FN',
     note: 'The science and the geography — what salt actually does over eleven days, where the ingredient travelled from, and what it meant to the people who carried it.',
-    image:
-      'https://images.pexels.com/photos/20067918/pexels-photo-20067918.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
+    image: '/accordion-3.webp',
   },
   {
     id: 'letter',
@@ -48,8 +45,7 @@ export const envelopeContents = [
     fig: 'Letter IV',
     catalog: 'MGNL-001-LT',
     note: 'A handwritten note from the studio — the memory or question that started the whole investigation, signed in ink.',
-    image:
-      'https://images.pexels.com/photos/51343/old-letters-old-letter-handwriting-51343.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
+    image: '/accordion-4.webp',
   },
   {
     id: 'surprise',

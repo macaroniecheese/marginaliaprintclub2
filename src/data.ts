@@ -53,8 +53,7 @@ export const envelopeContents = [
     fig: 'Enclosure V',
     catalog: 'MGNL-001-SP',
     note: 'Something different every month — a playlist, a seed packet, a folded map, a small object that belongs to the story but won\u2019t be announced in advance.',
-    image:
-      'https://images.pexels.com/photos/28921194/pexels-photo-28921194.jpeg?auto=compress&cs=tinysrgb&h=900&w=1200',
+    image: '/accordion-5.webp',
   },
 ];
 

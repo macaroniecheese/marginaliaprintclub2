@@ -38,10 +38,16 @@ function Hero({
 }) {
   return (
     <section className="relative min-h-screen flex items-end overflow-hidden">
-      <img
-        src="/hero-image.webp"
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover object-center scale-in"
+      <div
+        className="absolute inset-0 scale-in"
+        style={{
+          backgroundImage: 'url(/hero-image.webp)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+        }}
+        role="img"
+        aria-hidden="true"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-ink/30" />
 
@@ -95,7 +101,7 @@ function ContentsAccordion({
       <div className="max-w-8xl mx-auto">
         <div className="mb-20">
           <h2 className="font-display font-light text-4xl md:text-6xl text-ink leading-[0.95] tracking-tight text-balance">
-            contents of the envelope
+            Contents of the Envelope
           </h2>
         </div>
 

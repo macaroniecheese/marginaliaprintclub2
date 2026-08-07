@@ -37,22 +37,53 @@ function Hero({
   onSeeInside: () => void;
 }) {
   return (
-    <section className="min-h-screen flex flex-col md:flex-row">
-      {/* Left — cream text panel */}
-      <div className="flex flex-col justify-center px-8 md:px-16 lg:px-24 py-32 md:py-0 bg-paper w-full md:w-[48%] lg:w-[44%] flex-shrink-0">
-        <div className="max-w-lg">
-          <h1 className="font-display font-light text-ink text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.92] tracking-tight fade-up text-balance">
+    // Height restricted to 80% viewport height, matching the native site background color
+    <section className="relative h-[80vh] flex items-center overflow-hidden bg-paper px-6 sm:px-16 md:px-24 lg:px-36 xl:px-48">
+      
+      {/* Background Transparent Image Container — Z-indexed behind the typography content */}
+      <div
+        className="absolute inset-0 scale-in z-0 opacity-95 pointer-events-none"
+        style={{
+          backgroundImage: "url('/hero-image copy copy.webp')",
+          backgroundSize: 'contain', // Set to contain so your cutout illustration doesn't stretch awkwardly
+          backgroundPosition: 'right center', // Pushes the artwork to the right side to leave text breathing room
+          backgroundRepeat: 'no-repeat',
+        }}
+        role="img"
+        aria-hidden="true"
+      />
+
+      {/* Front-Facing Content Overlay — Sitting on top of the image layer (z-20) */}
+      <div className="relative z-20 w-full max-w-xl py-12">
+        <div>
+          {/* 
+            Added custom inline styles for a text-shadow using the exact paper texture color palette.
+            This builds a microscopic halo protection layer around each letter stroke.
+          */}
+          <h1 
+            className="font-display font-light text-ink text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.92] tracking-tight fade-up text-balance"
+            style={{
+              textShadow: '0 0 12px var(--color-paper, #F5F3EE), 0 0 4px var(--color-paper, #F5F3EE)'
+            }}
+          >
             Nothing we eat exists in isolation.
           </h1>
-          <p className="font-display italic font-light text-ink-soft text-base md:text-lg lg:text-xl mt-8 leading-relaxed fade-up">
+          
+          <p 
+            className="font-display italic font-light text-ink-soft text-base md:text-lg lg:text-xl mt-8 leading-relaxed fade-up text-balance"
+            style={{
+              textShadow: '0 0 8px var(--color-paper, #F5F3EE)'
+            }}
+          >
             Each month, Marginalia follows one ingredient, technique, or dish
             through an illustrated archive, part recipe, part artwork, part
             field note.
           </p>
+          
           <div className="flex flex-col sm:flex-row gap-4 mt-12 fade-up">
             <button
               onClick={() => onNavigate('archive')}
-              className="px-10 py-4 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent transition-colors duration-500 tactile"
+              className="px-10 py-4 bg-ink text-paper font-mono text-xs tracking-[0.16em] uppercase hover:bg-accent hover:text-white transition-colors duration-500 tactile"
             >
               Become an Archivist
             </button>
@@ -65,31 +96,12 @@ function Hero({
           </div>
         </div>
       </div>
-
-      {/* Right — full-bleed image */}
-      <div className="relative flex-1 min-h-[55vw] md:min-h-0 overflow-hidden bg-[#F5F3EE]">
-        <div
-          className="absolute inset-0 scale-in"
-          style={{
-            backgroundImage: "url('/hero-image copy.webp')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
-          }}
-          role="img"
-          aria-hidden="true"
-        />
-      </div>
     </section>
   );
 }
 
 /* ═══════════════════════════════════════════════════ */
 /*  2. CONTENTS — horizontal accordion                    */
-/*  5 collapsed panels side by side. On hover or click,  */
-/*  the panel expands horizontally to reveal a full image */
-/*  with a short label. Collapsed panels show a thin      */
-/*  sliver with just a label.                             */
 /* ═══════════════════════════════════════════════════ */
 function ContentsAccordion({
   sectionRef,
@@ -120,12 +132,11 @@ function ContentsAccordion({
               <div
                 key={item.id}
                 className={`relative overflow-hidden bg-paper-deep cursor-pointer transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  isActive ? 'flex-[5]' : 'flex-[0.4]'
+                  isActive ? 'flex-' : 'flex-[0.4]'
                 }`}
                 onMouseEnter={() => setActive(i)}
                 onClick={() => setActive(i)}
               >
-                {/* Full image — visible when expanded */}
                 <img
                   src={item.image}
                   alt={item.label}
@@ -136,14 +147,12 @@ function ContentsAccordion({
                   }`}
                 />
 
-                {/* Dark overlay for text legibility when expanded */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent transition-opacity duration-[800ms] ${
                     isActive ? 'opacity-100' : 'opacity-0'
                   }`}
                 />
 
-                {/* Collapsed label — vertical text on the sliver */}
                 <div
                   className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
                     isActive ? 'opacity-0' : 'opacity-100'
@@ -154,7 +163,6 @@ function ContentsAccordion({
                   </span>
                 </div>
 
-                {/* Expanded content — label and note */}
                 <div
                   className={`absolute bottom-0 left-0 right-0 p-8 md:p-10 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isActive
